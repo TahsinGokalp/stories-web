@@ -37,8 +37,8 @@
                                    class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">
                                     Düzenle
                                 </a>
-                                <a href="{{ route('books.add') }}"
-                                   class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">
+                                <a href="{{ route('books.delete', $book->id) }}"
+                                   class="delete-btn my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">
                                     Sil
                                 </a>
                             </td>
