@@ -12,36 +12,39 @@
                         </div>
                     </div>
                 @endif
-                <a href="{{ route('books.add') }}"
+                <a href="{{ route('books.page.add', $bookId) }}"
                         class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
-                    Kitap Ekle
+                    Sayfa Ekle
                 </a>
                 <table class="table-fixed w-full">
                     <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-4 py-2 w-40">Kitap Adı</th>
-                        <th class="px-4 py-2">Kitap Resmi</th>
+                        <th class="px-4 py-2 w-40">Sıra</th>
+                        <th class="px-4 py-2">Sayfa Resmi</th>
+                        <th class="px-4 py-2">Ses</th>
                         <th class="px-4 py-2">İşlemler</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($books as $book)
+                    @foreach($pages as $page)
                         <tr>
-                            <td class="border px-4 py-2">{{ $book->title }}</td>
+                            <td class="border px-4 py-2">{{ $page->page_order }}</td>
                             <td class="border px-4 py-2">
-                                <img src="{{ route('books.serve', $book->id) }}" class="max-w-full h-auto rounded-lg" alt="">
-
+                                <img src="{{ route('books.page.serve', [$bookId, $page->id]) }}" class="max-w-full h-auto rounded-lg" alt="">
                             </td>
                             <td class="border px-4 py-2">
-                                <a href="{{ route('books.page', $book->id) }}"
-                                   class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
-                                    Sayfalar
-                                </a>
-                                <a href="{{ route('books.edit', $book->id) }}"
+                                @if($page->sound === null)
+                                    Yok
+                                @else
+                                    Var
+                                @endif
+                            </td>
+                            <td class="border px-4 py-2">
+                                <a href="{{ route('books.page.edit', [$bookId, $page->id]) }}"
                                    class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">
                                     Düzenle
                                 </a>
-                                <a href="{{ route('books.delete', $book->id) }}"
+                                <a href="{{ route('books.page.delete', [$bookId, $page->id]) }}"
                                    class="delete-btn my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">
                                     Sil
                                 </a>

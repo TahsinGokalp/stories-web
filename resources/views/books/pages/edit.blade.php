@@ -2,25 +2,33 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-                <form method="post" enctype="multipart/form-data" action="{!! route('books.save') !!}">
+                <form method="post" enctype="multipart/form-data" action="{!! route('books.page.update', [$bookId, $edit->id]) !!}">
                     @csrf
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="">
                             <div class="mb-4">
-                                <label for="title"
-                                       class="block text-gray-700 text-sm font-bold mb-2">Kitap Adı</label>
+                                <label for="page_order"
+                                       class="block text-gray-700 text-sm font-bold mb-2">Sıra</label>
                                 <input type="text"
                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                       id="title" placeholder="Kitap Adı" name="title">
-                                @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
+                                       id="page_order" placeholder="Sıra" name="page_order" value="{{ $edit->page_order }}">
+                                @error('page_order') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
                             <div class="mb-4">
                                 <label for="cover"
-                                       class="block text-gray-700 text-sm font-bold mb-2">Kitap Resmi</label>
+                                       class="block text-gray-700 text-sm font-bold mb-2">Sayfa Resmi</label>
                                 <input type="file"
                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                       id="cover" name="cover">
-                                @error('cover') <span class="text-red-500">{{ $message }}</span>@enderror
+                                       id="image" name="image">
+                                @error('image') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </div>
+                            <div class="mb-4">
+                                <label for="cover"
+                                       class="block text-gray-700 text-sm font-bold mb-2">Sayfa Ses</label>
+                                <input type="file"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="sound" name="sound">
+                                @error('sound') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
                         </div>
                     </div>

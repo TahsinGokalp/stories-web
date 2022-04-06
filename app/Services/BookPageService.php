@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Book;
+use App\Models\BookPage;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
@@ -13,7 +14,7 @@ use PDOException;
 use Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class BookService
+class BookPageService
 {
 
     private function coverPath($image = null): string
@@ -21,31 +22,57 @@ class BookService
         return storage_path('books/'. $image);
     }
 
-    public function all(): Collection
+    private function soundPath($sound = null): string
     {
-        return Book::all();
+        return storage_path('sound/'. $sound);
     }
 
-    public function get($id): Book
+
+    public function all($id): Collection
     {
-        return Book::findOrFail($id);
+        return BookPage::where('book_id', $id)->get();
     }
 
-    public function uploadCover(Book $book, $request): ?string
+    public function get($id): BookPage
     {
-        if($request->hasFile('cover') && $request->file('cover')->isValid()){
-            $file = $request->file('cover');
+        return BookPage::findOrFail($id);
+    }
+
+    public function uploadImage(BookPage $book, $request): ?string
+    {
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $file = $request->file('image');
             $destinationPath = $this->coverPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->cover !== null && File::exists($this->coverPath($book->cover))){
-                unlink($this->coverPath($book->cover));
+            if($book->image !== null && File::exists($this->coverPath($book->image))){
+                unlink($this->coverPath($book->image));
             }
 
             return $filename;
         }
-        if($book->cover !== null){
-            return $book->cover;
+        if($book->image !== null){
+            return $book->image;
+        }
+
+        return null;
+    }
+
+    public function uploadSound(BookPage $book, $request): ?string
+    {
+        if($request->hasFile('sound') && $request->file('sound')->isValid()){
+            $file = $request->file('sound');
+            $destinationPath = $this->soundPath();
+            $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+            if($book->sound !== null && File::exists($this->soundPath($book->sound))){
+                unlink($this->soundPath($book->sound));
+            }
+
+            return $filename;
+        }
+        if($book->sound !== null){
+            return $book->sound;
         }
 
         return null;
@@ -58,15 +85,17 @@ class BookService
         ])->withInput()->throwResponse();
     }
 
-    public function saveItem($request): void
+    public function saveItem($bookId, $request): void
     {
         if(isset($request['id'])){
             $item = $this->get($request['id']);
         }else{
-            $item = new Book();
+            $item = new BookPage();
+            $item->book_id = $bookId;
         }
-        $item->title = $request['title'];
-        $item->cover = $this->uploadCover($item, $request);
+        $item->page_order = $request['page_order'];
+        $item->image = $this->uploadImage($item, $request);
+        $item->sound = $this->uploadSound($item, $request);
         try {
             $item->save();
         } catch (Exception $e) {
@@ -80,8 +109,8 @@ class BookService
     {
         try {
             $item = $this->get($id);
-            if(File::exists($this->coverPath($item->cover))){
-                unlink($this->coverPath($item->cover));
+            if(File::exists($this->coverPath($item->image))){
+                unlink($this->coverPath($item->image));
             }
             $item->delete();
         } catch (PDOException $e) {
@@ -101,6 +130,6 @@ class BookService
     {
         $item = $this->get($id);
 
-        return response()->file($this->coverPath($item->cover));
+        return response()->file($this->coverPath($item->image));
     }
 }

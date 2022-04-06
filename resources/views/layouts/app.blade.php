@@ -31,7 +31,7 @@
         </script>
 
         <script>
-            function makeDeleteBtn(body = {}, container = null, selector = null, title = null, text = null, deleteText = null, cancel = null, redirect = null, refresh = false){
+            function makeDeleteBtn(body = {}, container = null, selector = null, title = null, text = null, deleteText = null, cancel = null, redirect = null, refresh = true){
                 if(container == null){
                     container = 'body';
                 }
