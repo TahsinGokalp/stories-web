@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Parent;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveBookRequest;
 use App\Http\Requests\UpdateBookRequest;
-use App\Services\BookService;
+use App\Services\Parent\BookService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use function redirect;
+use function view;
 
 class BookController extends Controller
 {
@@ -24,14 +27,14 @@ class BookController extends Controller
 
     public function index(): Factory|View|Application
     {
-        return view('books.index', [
+        return view('parent.books.index', [
             'books' => $this->book->all(),
         ]);
     }
 
     public function add(): Factory|View|Application
     {
-        return view('books.add');
+        return view('parent.books.add');
     }
 
     public function save(SaveBookRequest $request): RedirectResponse
@@ -45,7 +48,7 @@ class BookController extends Controller
 
     public function edit($id): Factory|View|Application
     {
-        return view('books.edit', [
+        return view('parent.books.edit', [
             'edit' => $this->book->get($id),
         ]);
     }

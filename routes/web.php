@@ -1,40 +1,54 @@
 <?php
 
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\BookPageController;
+use App\Http\Controllers\Child\BookController as ChildBookController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Parent\BookController as ParentBookController;
+use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', static function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('books');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+    'role:'. User::CHILD
 ])->group(callback: function () {
-    Route::get('/dashboard', static function () {return view('dashboard');})->name('dashboard');
+    Route::prefix('books')->group(function () {
+        Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
+        Route::get('cover/{id}', [ChildBookController::class, 'cover'])->name('child.books.cover');
+        Route::get('{id}', [ChildBookController::class, 'show'])->name('child.books.show');
+    });
+});
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'role:'. User::PARENT
+])->prefix('admin')->group(callback: function () {
+    Route::get('/', static function () {return view('dashboard');})->name('dashboard');
     //Books
     Route::prefix('books')->group(function () {
-        Route::get('/', [BookController::class, 'index'])->name('books');
-        Route::get('add', [BookController::class, 'add'])->name('books.add');
-        Route::post('save', [BookController::class, 'save'])->name('books.save');
-        Route::get('edit/{id}', [BookController::class, 'edit'])->name('books.edit');
-        Route::post('update/{id}', [BookController::class, 'update'])->name('books.update');
-        Route::post('delete/{id}', [BookController::class, 'delete'])->name('books.delete');
-        Route::get('serve/{id}', [BookController::class, 'serve'])->name('books.serve');
+        Route::get('/', [ParentBookController::class, 'index'])->name('books');
+        Route::get('add', [ParentBookController::class, 'add'])->name('books.add');
+        Route::post('save', [ParentBookController::class, 'save'])->name('books.save');
+        Route::get('edit/{id}', [ParentBookController::class, 'edit'])->name('books.edit');
+        Route::post('update/{id}', [ParentBookController::class, 'update'])->name('books.update');
+        Route::post('delete/{id}', [ParentBookController::class, 'delete'])->name('books.delete');
+        Route::get('serve/{id}', [ParentBookController::class, 'serve'])->name('books.serve');
     });
 
     //Book Pages
     Route::prefix('book-pages/{bookId}')->group(function () {
-        Route::get('/', [BookPageController::class, 'index'])->name('books.page');
-        Route::get('add', [BookPageController::class, 'add'])->name('books.page.add');
-        Route::post('save', [BookPageController::class, 'save'])->name('books.page.save');
-        Route::get('edit/{id}', [BookPageController::class, 'edit'])->name('books.page.edit');
-        Route::post('update/{id}', [BookPageController::class, 'update'])->name('books.page.update');
-        Route::post('delete/{id}', [BookPageController::class, 'delete'])->name('books.page.delete');
-        Route::get('serve/{id}', [BookPageController::class, 'serve'])->name('books.page.serve');
+        Route::get('/', [ParentBookPageController::class, 'index'])->name('books.page');
+        Route::get('add', [ParentBookPageController::class, 'add'])->name('books.page.add');
+        Route::post('save', [ParentBookPageController::class, 'save'])->name('books.page.save');
+        Route::get('edit/{id}', [ParentBookPageController::class, 'edit'])->name('books.page.edit');
+        Route::post('update/{id}', [ParentBookPageController::class, 'update'])->name('books.page.update');
+        Route::post('delete/{id}', [ParentBookPageController::class, 'delete'])->name('books.page.delete');
+        Route::get('serve/{id}', [ParentBookPageController::class, 'serve'])->name('books.page.serve');
     });
 
 });

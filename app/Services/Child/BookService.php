@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Child;
 
 use App\Models\Book;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -26,10 +28,27 @@ class BookService
         return Book::all();
     }
 
-    public function get($id): Book
+    public function cover($id): BinaryFileResponse
     {
-        return Book::findOrFail($id);
+        $item = $this->get($id);
+
+        return response()->file($this->coverPath($item->cover));
     }
+
+    public function get($id): Builder|array|Collection|Model
+    {
+        return Book::with('pages')->findOrFail($id);
+    }
+
+
+
+
+
+
+
+
+
+
 
     public function uploadCover(Book $book, $request): ?string
     {
@@ -97,10 +116,5 @@ class BookService
         return Response::message('OK');
     }
 
-    public function serve($id): BinaryFileResponse
-    {
-        $item = $this->get($id);
 
-        return response()->file($this->coverPath($item->cover));
-    }
 }

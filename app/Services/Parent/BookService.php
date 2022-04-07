@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Parent;
 
 use App\Models\Book;
-use App\Models\BookPage;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
@@ -13,8 +12,12 @@ use Illuminate\Support\Str;
 use PDOException;
 use Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use function __;
+use function redirect;
+use function response;
+use function storage_path;
 
-class BookPageService
+class BookService
 {
 
     private function coverPath($image = null): string
@@ -22,57 +25,31 @@ class BookPageService
         return storage_path('books/'. $image);
     }
 
-    private function soundPath($sound = null): string
+    public function all(): Collection
     {
-        return storage_path('sound/'. $sound);
+        return Book::all();
     }
 
-
-    public function all($id): Collection
+    public function get($id): Book
     {
-        return BookPage::where('book_id', $id)->get();
+        return Book::findOrFail($id);
     }
 
-    public function get($id): BookPage
+    public function uploadCover(Book $book, $request): ?string
     {
-        return BookPage::findOrFail($id);
-    }
-
-    public function uploadImage(BookPage $book, $request): ?string
-    {
-        if($request->hasFile('image') && $request->file('image')->isValid()){
-            $file = $request->file('image');
+        if($request->hasFile('cover') && $request->file('cover')->isValid()){
+            $file = $request->file('cover');
             $destinationPath = $this->coverPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->image !== null && File::exists($this->coverPath($book->image))){
-                unlink($this->coverPath($book->image));
+            if($book->cover !== null && File::exists($this->coverPath($book->cover))){
+                unlink($this->coverPath($book->cover));
             }
 
             return $filename;
         }
-        if($book->image !== null){
-            return $book->image;
-        }
-
-        return null;
-    }
-
-    public function uploadSound(BookPage $book, $request): ?string
-    {
-        if($request->hasFile('sound') && $request->file('sound')->isValid()){
-            $file = $request->file('sound');
-            $destinationPath = $this->soundPath();
-            $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
-            $file->move($destinationPath, $filename);
-            if($book->sound !== null && File::exists($this->soundPath($book->sound))){
-                unlink($this->soundPath($book->sound));
-            }
-
-            return $filename;
-        }
-        if($book->sound !== null){
-            return $book->sound;
+        if($book->cover !== null){
+            return $book->cover;
         }
 
         return null;
@@ -85,17 +62,15 @@ class BookPageService
         ])->withInput()->throwResponse();
     }
 
-    public function saveItem($bookId, $request): void
+    public function saveItem($request): void
     {
         if(isset($request['id'])){
             $item = $this->get($request['id']);
         }else{
-            $item = new BookPage();
-            $item->book_id = $bookId;
+            $item = new Book();
         }
-        $item->page_order = $request['page_order'];
-        $item->image = $this->uploadImage($item, $request);
-        $item->sound = $this->uploadSound($item, $request);
+        $item->title = $request['title'];
+        $item->cover = $this->uploadCover($item, $request);
         try {
             $item->save();
         } catch (Exception $e) {
@@ -109,8 +84,8 @@ class BookPageService
     {
         try {
             $item = $this->get($id);
-            if(File::exists($this->coverPath($item->image))){
-                unlink($this->coverPath($item->image));
+            if(File::exists($this->coverPath($item->cover))){
+                unlink($this->coverPath($item->cover));
             }
             $item->delete();
         } catch (PDOException $e) {
@@ -130,6 +105,6 @@ class BookPageService
     {
         $item = $this->get($id);
 
-        return response()->file($this->coverPath($item->image));
+        return response()->file($this->coverPath($item->cover));
     }
 }
