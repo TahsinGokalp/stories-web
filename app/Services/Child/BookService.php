@@ -40,6 +40,13 @@ class BookService
         return Book::with('pages')->findOrFail($id);
     }
 
+    public function page($id): BinaryFileResponse
+    {
+        $item = $this->get($id);
+
+        return response()->file($this->coverPath($item->cover));
+    }
+
 
 
 

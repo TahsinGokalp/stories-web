@@ -8,6 +8,12 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
+// Bootstrap
+mix.combine([
+    'resources/css/bootstrap.css',
+    'resources/css/books.css',
+],'public/css/books.css').purgeCss();
+
 // Jquery
 mix.combine([
     'resources/plugins/jquery/jquery-3.6.0.js',

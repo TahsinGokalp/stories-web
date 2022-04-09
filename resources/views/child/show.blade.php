@@ -1,29 +1,19 @@
 @extends('child.layout')
 
 @section('content')
+    <style>
+        .carousel-item img {
+            max-height: 100vh;
+            object-fit: cover;
+        }
+    </style>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="https://image.ibb.co/kvhXGH/jetty_1373173_1920.jpg" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Title</h5>
-                    <p>Text goes here</p>
+            @foreach($book->pages as $page)
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://image.ibb.co/kvhXGH/jetty_1373173_1920.jpg">
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="https://image.ibb.co/kvhXGH/jetty_1373173_1920.jpg" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Title</h5>
-                    <p>Text goes here</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="https://image.ibb.co/kvhXGH/jetty_1373173_1920.jpg" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Title</h5>
-                    <p>Text goes here</p>
-                </div>
-            </div>
+            @endforeach
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

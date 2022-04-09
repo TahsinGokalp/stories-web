@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/plugins/hammer/plugin.min.js": "/plugins/hammer/plugin.min.js",
+    "/css/books.css": "/css/books.css",
     "/plugins/jquery/plugin.min.js": "/plugins/jquery/plugin.min.js"
 }
