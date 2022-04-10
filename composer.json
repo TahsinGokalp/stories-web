@@ -17,6 +17,7 @@
         "ext-fileinfo": "*"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
         "jubeki/laravel-code-style": "^1.0",
