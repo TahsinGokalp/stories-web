@@ -47,11 +47,8 @@ class BookService
 
             return $filename;
         }
-        if($book->cover !== null){
-            return $book->cover;
-        }
 
-        return null;
+        return $book->cover ?? null;
     }
 
     public function redirectBackWithError(string $e = ''): void
@@ -93,7 +90,7 @@ class BookService
             return Response::message('ERROR',
                 ((int) $e->getCode() === 23000) ? 'Seçilen öğeye bağlı veri bulunmaktadır. Verileri sildikten sonra tekrar deneyebilirsiniz.' : __('Whoops, something went wrong on our servers.')
             );
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::message('ERROR', __('Whoops, something went wrong on our servers.'));
         }
 

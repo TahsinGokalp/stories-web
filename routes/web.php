@@ -1,36 +1,47 @@
 <?php
 
 use App\Http\Controllers\Child\BookController as ChildBookController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\Parent\BookController as ParentBookController;
 use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('books');
+//Redirect Route
+Route::get('/', [RedirectController::class, 'index'])->name('books');
 
+//Child Panel
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
     'role:'.User::CHILD,
 ])->group(callback: function () {
+
     Route::prefix('books')->group(function () {
+        //Home
         Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
+        //Cover, Page, Sound Serve
         Route::get('cover/{id}', [ChildBookController::class, 'cover'])->name('child.books.cover');
         Route::get('page/{id}', [ChildBookController::class, 'page'])->name('child.books.page');
         Route::get('sound/{id}', [ChildBookController::class, 'sound'])->name('child.books.sound');
+        //Book Detail
         Route::get('{id}', [ChildBookController::class, 'show'])->name('child.books.show');
     });
+
 });
 
+//Parent Panel
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
     'role:'.User::PARENT,
 ])->prefix('admin')->group(callback: function () {
+
+    //Home
     Route::get('/', static function () {return view('dashboard'); })->name('dashboard');
+
     //Books
     Route::prefix('books')->group(function () {
         Route::get('/', [ParentBookController::class, 'index'])->name('books');

@@ -52,11 +52,8 @@ class BookPageService
 
             return $filename;
         }
-        if($book->image !== null){
-            return $book->image;
-        }
 
-        return null;
+        return $book->image ?? null;
     }
 
     public function uploadSound(BookPage $book, $request): ?string
@@ -72,11 +69,7 @@ class BookPageService
 
             return $filename;
         }
-        if($book->sound !== null){
-            return $book->sound;
-        }
-
-        return null;
+        return $book->sound ?? null;
     }
 
     public function redirectBackWithError(string $e = ''): void
@@ -120,7 +113,7 @@ class BookPageService
             return Response::message('ERROR',
                 ((int) $e->getCode() === 23000) ? 'Seçilen öğeye bağlı veri bulunmaktadır. Verileri sildikten sonra tekrar deneyebilirsiniz.' : __('Whoops, something went wrong on our servers.')
             );
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::message('ERROR', __('Whoops, something went wrong on our servers.'));
         }
 

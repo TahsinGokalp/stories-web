@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
-class HomeController extends Controller
+class RedirectController extends Controller
 {
     public function index(): RedirectResponse
     {
