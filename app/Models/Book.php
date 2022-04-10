@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
-
     protected $fillable = [
         'title',
         'cover',
@@ -17,5 +16,4 @@ class Book extends Model
     {
         return $this->hasMany(BookPage::class, 'book_id', 'id');
     }
-
 }

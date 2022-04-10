@@ -2,6 +2,7 @@
 
 namespace App\Services\Parent;
 
+use function __;
 use App\Models\Book;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,19 +11,17 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use PDOException;
-use Response;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use function __;
 use function redirect;
+use Response;
 use function response;
 use function storage_path;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BookService
 {
-
     private function coverPath($image = null): string
     {
-        return storage_path('books/'. $image);
+        return storage_path('books/'.$image);
     }
 
     public function all(): Collection

@@ -20,16 +20,16 @@ class UsersTableSeeder extends Seeder
         $child = Role::where('name', User::CHILD)->firstOrFail();
 
         $user = new User();
-        $user->name = "Tahsin Gökalp";
-        $user->email = "tahsinsaan@gmail.com";
-        $user->password = Hash::make("12345678");
+        $user->name = 'Tahsin Gökalp';
+        $user->email = 'tahsinsaan@gmail.com';
+        $user->password = Hash::make('12345678');
         $user->save();
         $user->assignRole($parent);
 
         $user = new User();
-        $user->name = "Doğa İrem";
-        $user->email = "dogairem@tahsingokalp.dev";
-        $user->password = Hash::make("12345678");
+        $user->name = 'Doğa İrem';
+        $user->email = 'dogairem@tahsingokalp.dev';
+        $user->password = Hash::make('12345678');
         $user->save();
         $user->assignRole($child);
     }

@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BookController extends Controller
 {
-
     protected BookService $book;
 
     public function __construct(BookService $book)

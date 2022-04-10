@@ -13,7 +13,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'role:'. User::CHILD
+    'role:'.User::CHILD,
 ])->group(callback: function () {
     Route::prefix('books')->group(function () {
         Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
@@ -28,9 +28,9 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'role:'. User::PARENT
+    'role:'.User::PARENT,
 ])->prefix('admin')->group(callback: function () {
-    Route::get('/', static function () {return view('dashboard');})->name('dashboard');
+    Route::get('/', static function () {return view('dashboard'); })->name('dashboard');
     //Books
     Route::prefix('books')->group(function () {
         Route::get('/', [ParentBookController::class, 'index'])->name('books');

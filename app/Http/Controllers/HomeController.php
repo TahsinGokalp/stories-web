@@ -7,10 +7,9 @@ use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
-
     public function index(): RedirectResponse
     {
-        if(!auth()->user()){
+        if(! auth()->user()){
             return redirect()->route('login');
         }
 
@@ -20,5 +19,4 @@ class HomeController extends Controller
 
         return redirect()->route('child.books');
     }
-
 }

@@ -11,15 +11,14 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BookService
 {
-
     private function coverPath($image = null): string
     {
-        return storage_path('books/'. $image);
+        return storage_path('books/'.$image);
     }
 
     private function soundPath($sound = null): string
     {
-        return storage_path('sound/'. $sound);
+        return storage_path('sound/'.$sound);
     }
 
     public function all(): Collection
@@ -57,8 +56,7 @@ class BookService
 
         return response()->file($this->coverPath($item->image), [
             'Content-Type' => mime_content_type($this->coverPath($item->image)),
-            'Content-Length' => filesize($this->coverPath($item->image))
+            'Content-Length' => filesize($this->coverPath($item->image)),
         ]);
     }
-
 }
