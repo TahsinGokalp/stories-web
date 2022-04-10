@@ -37,4 +37,14 @@ class BookController extends Controller
             'book' => $this->book->get($id),
         ]);
     }
+
+    public function sound($id): BinaryFileResponse
+    {
+        return $this->book->sound($id);
+    }
+
+    public function page($id): BinaryFileResponse
+    {
+        return $this->book->page($id);
+    }
 }

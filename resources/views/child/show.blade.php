@@ -1,40 +1,50 @@
-@extends('child.layout')
 
-@section('content')
-    <style>
-        .carousel-item img {
-            max-height: 100vh;
-            object-fit: cover;
-        }
-    </style>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
+<!DOCTYPE html>
+<html lang="en" class="no-js demo-4">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitap Detay</title>
+    <link rel="stylesheet" href="{{ asset('plugins/bookblock/plugin.min.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="bb-custom-wrapper">
+        <div id="bb-bookblock" class="bb-bookblock">
             @foreach($book->pages as $page)
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://image.ibb.co/kvhXGH/jetty_1373173_1920.jpg">
+                <div class="bb-item">
+                    <div class="bb-custom-side">
+                        <img data-src="{{ route('child.books.page', $page->id) }}" class="hw-100 lazy" />
+                    </div>
                 </div>
             @endforeach
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <nav>
+            <a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
+            <a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+            <a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+            <a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a>
+            <a id="bb-close" href="{{ route('child.books') }}" class="bb-custom-icon bb-custom-icon-red bb-custom-icon-close">Close</a>
+        </nav>
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        $('.carousel').carousel({
-            wrap: false
-        });
-        $('.carousel').on('slide.bs.carousel', function onSlide (ev) {
-            var id = ev.relatedTarget.id;
-            alert(ev.relatedTarget);
-            console.log(ev.relatedTarget);
-        });
-    </script>
-@endsection
+</div>
+<script src="{{ asset('plugins/modernizr/plugin.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery/plugin.min.js') }}"></script>
+<script src="{{ asset('plugins/howler/plugin.min.js') }}"></script>
+<script src="{{ asset('plugins/bookblock/plugin.min.js') }}"></script>
+<script src="{{ asset('plugins/lazy/plugin.min.js') }}"></script>
+<script>
+    var soundFiles = {
+        @foreach($book->pages as $page)
+            @if($page->sound !== null)
+                {{ $loop->iteration }} : "{{ route('child.books.sound', $page->id) }}",
+            @endif
+        @endforeach
+    };
+    $(function() {
+        $('.lazy').Lazy();
+    });
+</script>
+</body>
+</html>

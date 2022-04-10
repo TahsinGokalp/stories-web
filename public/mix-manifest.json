@@ -2,5 +2,10 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/books.css": "/css/books.css",
-    "/plugins/jquery/plugin.min.js": "/plugins/jquery/plugin.min.js"
+    "/plugins/jquery/plugin.min.js": "/plugins/jquery/plugin.min.js",
+    "/plugins/modernizr/plugin.min.js": "/plugins/modernizr/plugin.min.js",
+    "/plugins/bookblock/plugin.min.js": "/plugins/bookblock/plugin.min.js",
+    "/plugins/bookblock/plugin.min.css": "/plugins/bookblock/plugin.min.css",
+    "/plugins/howler/plugin.min.js": "/plugins/howler/plugin.min.js",
+    "/plugins/lazy/plugin.min.js": "/plugins/lazy/plugin.min.js"
 }

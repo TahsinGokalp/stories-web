@@ -18,6 +18,8 @@ Route::middleware([
     Route::prefix('books')->group(function () {
         Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
         Route::get('cover/{id}', [ChildBookController::class, 'cover'])->name('child.books.cover');
+        Route::get('page/{id}', [ChildBookController::class, 'page'])->name('child.books.page');
+        Route::get('sound/{id}', [ChildBookController::class, 'sound'])->name('child.books.sound');
         Route::get('{id}', [ChildBookController::class, 'show'])->name('child.books.show');
     });
 });

@@ -8,7 +8,7 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
-// Bootstrap
+// Books
 mix.combine([
     'resources/css/bootstrap.css',
     'resources/css/books.css',
@@ -18,6 +18,32 @@ mix.combine([
 mix.combine([
     'resources/plugins/jquery/jquery-3.6.0.js',
 ],'public/plugins/jquery/plugin.min.js');
+
+// Modernizr
+mix.combine([
+    'resources/plugins/modernizr/modernizr.js',
+],'public/plugins/modernizr/plugin.min.js');
+
+// Bookblock
+mix.combine([
+    'resources/plugins/bookblock/bookblock.js',
+    'resources/plugins/bookblock/custom.js',
+],'public/plugins/bookblock/plugin.min.js');
+
+mix.combine([
+    'resources/plugins/bookblock/bookblock.css',
+],'public/plugins/bookblock/plugin.min.css').purgeCss();
+
+// Howler
+mix.combine([
+    'resources/plugins/howler/howler.js',
+],'public/plugins/howler/plugin.min.js');
+
+// Lazy
+mix.combine([
+    'resources/plugins/lazy/lazy.js',
+    'resources/plugins/lazy/jquery.lazy.plugins.js',
+],'public/plugins/lazy/plugin.min.js');
 
 if (mix.inProduction()) {
     mix.version();
