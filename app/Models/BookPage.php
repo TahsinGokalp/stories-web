@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\BookPage
+ * App\Models\BookPage.
  *
  * @property int $id
  * @property int $book_id
@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $sound
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|BookPage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BookPage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BookPage query()

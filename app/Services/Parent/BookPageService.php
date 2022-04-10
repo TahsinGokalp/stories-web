@@ -69,6 +69,7 @@ class BookPageService
 
             return $filename;
         }
+
         return $book->sound ?? null;
     }
 

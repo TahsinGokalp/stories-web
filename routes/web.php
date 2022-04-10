@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Child\BookController as ChildBookController;
-use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\Parent\BookController as ParentBookController;
 use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
+use App\Http\Controllers\RedirectController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
