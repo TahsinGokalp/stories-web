@@ -31,7 +31,7 @@ var Page = (function() {
                 circular	: false,
                 autoplay        : false,
                 onEndFlip	: function( old, page, isLimit ) {
-                    playSound(page);
+                    playSound(page+1);
                     return false;
                 },
             } );
