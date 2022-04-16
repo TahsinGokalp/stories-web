@@ -41,12 +41,12 @@ class BookPageService
 
     public function uploadImage(BookPage $book, $request): ?string
     {
-        if($request->hasFile('image') && $request->file('image')->isValid()){
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $file = $request->file('image');
             $destinationPath = $this->coverPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->image !== null && File::exists($this->coverPath($book->image))){
+            if ($book->image !== null && File::exists($this->coverPath($book->image))) {
                 unlink($this->coverPath($book->image));
             }
 
@@ -58,12 +58,12 @@ class BookPageService
 
     public function uploadSound(BookPage $book, $request): ?string
     {
-        if($request->hasFile('sound') && $request->file('sound')->isValid()){
+        if ($request->hasFile('sound') && $request->file('sound')->isValid()) {
             $file = $request->file('sound');
             $destinationPath = $this->soundPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->sound !== null && File::exists($this->soundPath($book->sound))){
+            if ($book->sound !== null && File::exists($this->soundPath($book->sound))) {
                 unlink($this->soundPath($book->sound));
             }
 
@@ -82,9 +82,9 @@ class BookPageService
 
     public function saveItem($bookId, $request): void
     {
-        if(isset($request['id'])){
+        if (isset($request['id'])) {
             $item = $this->get($request['id']);
-        }else{
+        } else {
             $item = new BookPage();
             $item->book_id = $bookId;
         }
@@ -104,7 +104,7 @@ class BookPageService
     {
         try {
             $item = $this->get($id);
-            if(File::exists($this->coverPath($item->image))){
+            if (File::exists($this->coverPath($item->image))) {
                 unlink($this->coverPath($item->image));
             }
             $item->delete();

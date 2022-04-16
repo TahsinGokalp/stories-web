@@ -36,12 +36,12 @@ class BookService
 
     public function uploadCover(Book $book, $request): ?string
     {
-        if($request->hasFile('cover') && $request->file('cover')->isValid()){
+        if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
             $file = $request->file('cover');
             $destinationPath = $this->coverPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->cover !== null && File::exists($this->coverPath($book->cover))){
+            if ($book->cover !== null && File::exists($this->coverPath($book->cover))) {
                 unlink($this->coverPath($book->cover));
             }
 
@@ -60,9 +60,9 @@ class BookService
 
     public function saveItem($request): void
     {
-        if(isset($request['id'])){
+        if (isset($request['id'])) {
             $item = $this->get($request['id']);
-        }else{
+        } else {
             $item = new Book();
         }
         $item->title = $request['title'];
@@ -80,7 +80,7 @@ class BookService
     {
         try {
             $item = $this->get($id);
-            if(File::exists($this->coverPath($item->cover))){
+            if (File::exists($this->coverPath($item->cover))) {
                 unlink($this->coverPath($item->cover));
             }
             $item->delete();

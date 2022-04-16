@@ -17,7 +17,6 @@ Route::middleware([
     'verified',
     'role:'.User::CHILD,
 ])->group(callback: function () {
-
     Route::prefix('books')->group(function () {
         //Home
         Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
@@ -28,7 +27,6 @@ Route::middleware([
         //Book Detail
         Route::get('{id}', [ChildBookController::class, 'show'])->name('child.books.show');
     });
-
 });
 
 //Parent Panel
@@ -40,7 +38,9 @@ Route::middleware([
 ])->prefix('admin')->group(callback: function () {
 
     //Home
-    Route::get('/', static function () {return view('dashboard'); })->name('dashboard');
+    Route::get('/', static function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     //Books
     Route::prefix('books')->group(function () {
@@ -63,5 +63,4 @@ Route::middleware([
         Route::post('delete/{id}', [ParentBookPageController::class, 'delete'])->name('books.page.delete');
         Route::get('serve/{id}', [ParentBookPageController::class, 'serve'])->name('books.page.serve');
     });
-
 });
