@@ -9,11 +9,11 @@ class RedirectController extends Controller
 {
     public function index(): RedirectResponse
     {
-        if(! auth()->user()){
+        if (! auth()->user()) {
             return redirect()->route('login');
         }
 
-        if(auth()->user()->hasRole(User::PARENT)){
+        if (auth()->user()->hasRole(User::PARENT)) {
             return redirect()->route('dashboard');
         }
 

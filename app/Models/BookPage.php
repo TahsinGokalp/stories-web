@@ -35,5 +35,4 @@ class BookPage extends Model
         'image',
         'sound',
     ];
-
 }

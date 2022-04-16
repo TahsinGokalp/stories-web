@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('book_id');
             $table->integer('page_order')->default(999);
             $table->string('image');
-            $table->string('sound')->nullable()->default(NULL);
+            $table->string('sound')->nullable()->default(null);
             $table->timestamps();
             $table->foreign('book_id')->references('id')->on('books');
         });
