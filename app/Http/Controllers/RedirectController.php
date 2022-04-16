@@ -14,7 +14,7 @@ class RedirectController extends Controller
         }
 
         if (auth()->user()->hasRole(User::PARENT)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('books');
         }
 
         return redirect()->route('child.books');

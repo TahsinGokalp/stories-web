@@ -37,11 +37,6 @@ Route::middleware([
     'role:'.User::PARENT,
 ])->prefix('admin')->group(callback: function () {
 
-    //Home
-    Route::get('/', static function () {
-        return view('dashboard');
-    })->name('dashboard');
-
     //Books
     Route::prefix('books')->group(function () {
         Route::get('/', [ParentBookController::class, 'index'])->name('books');
