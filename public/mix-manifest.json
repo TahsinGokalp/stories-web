@@ -7,5 +7,7 @@
     "/plugins/bookblock/plugin.min.js": "/plugins/bookblock/plugin.min.js",
     "/plugins/bookblock/plugin.min.css": "/plugins/bookblock/plugin.min.css",
     "/plugins/howler/plugin.min.js": "/plugins/howler/plugin.min.js",
-    "/plugins/lazy/plugin.min.js": "/plugins/lazy/plugin.min.js"
+    "/plugins/lazy/plugin.min.js": "/plugins/lazy/plugin.min.js",
+    "/plugins/datatables/plugin.min.js": "/plugins/datatables/plugin.min.js",
+    "/plugins/datatables/plugin.min.css": "/plugins/datatables/plugin.min.css"
 }

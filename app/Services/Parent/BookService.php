@@ -5,7 +5,6 @@ namespace App\Services\Parent;
 use function __;
 use App\Models\Book;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +15,7 @@ use Response;
 use function response;
 use function storage_path;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Yajra\DataTables\Facades\DataTables;
 
 class BookService
 {
@@ -24,9 +24,24 @@ class BookService
         return storage_path('books/'.$image);
     }
 
-    public function all(): Collection
+    public function data(): ?JsonResponse
     {
-        return Book::all();
+        $model = Book::query();
+        try {
+            return DataTables::of($model)->addColumn('image_html', function ($item) {
+                return '<img src="'.route('books.serve', $item->id).'" class="max-w-full h-auto rounded-lg" alt="">';
+            })->addColumn('actions', function ($item) {
+                $buttons = '';
+                $buttons .= '<a href="'.route('books.edit', $item->id).'" class="btn btn-outline-primary mr-2 edit-btn">Düzenle</a>';
+                $buttons .= '<a href="'.route('books.delete', $item->id).'" class="btn btn-outline-danger delete-btn">Sil</a>';
+
+                return $buttons;
+            })->toJson();
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return response()->json([]);
+        }
     }
 
     public function get($id): Book

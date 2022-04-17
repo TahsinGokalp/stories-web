@@ -40,6 +40,7 @@ Route::middleware([
     //Books
     Route::prefix('books')->group(function () {
         Route::get('/', [ParentBookController::class, 'index'])->name('books');
+        Route::get('data', [ParentBookController::class, 'data'])->name('books.data');
         Route::get('add', [ParentBookController::class, 'add'])->name('books.add');
         Route::post('save', [ParentBookController::class, 'save'])->name('books.save');
         Route::get('edit/{id}', [ParentBookController::class, 'edit'])->name('books.edit');

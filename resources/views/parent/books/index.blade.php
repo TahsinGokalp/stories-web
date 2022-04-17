@@ -16,41 +16,49 @@
                         class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
                     Kitap Ekle
                 </a>
-                <table class="table-fixed w-full">
+                <table class="table-fixed w-full" id="setting-default">
                     <thead>
-                    <tr class="bg-gray-100">
-                        <th class="px-4 py-2 w-40">Kitap Adı</th>
-                        <th class="px-4 py-2">Kitap Resmi</th>
-                        <th class="px-4 py-2">İşlemler</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($books as $book)
-                        <tr>
-                            <td class="border px-4 py-2">{{ $book->title }}</td>
-                            <td class="border px-4 py-2">
-                                <img src="{{ route('books.serve', $book->id) }}" class="max-w-full h-auto rounded-lg" alt="">
-
-                            </td>
-                            <td class="border px-4 py-2">
-                                <a href="{{ route('books.page', $book->id) }}"
-                                   class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
-                                    Sayfalar
-                                </a>
-                                <a href="{{ route('books.edit', $book->id) }}"
-                                   class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">
-                                    Düzenle
-                                </a>
-                                <a href="{{ route('books.delete', $book->id) }}"
-                                   class="delete-btn my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">
-                                    Sil
-                                </a>
-                            </td>
+                        <tr class="bg-gray-100">
+                            <th class="px-4 py-2 w-40">Kitap Adı</th>
+                            <th class="px-4 py-2">Kitap Resmi</th>
+                            <th class="px-4 py-2">İşlemler</th>
                         </tr>
-                    @endforeach
-                    </tbody>
+                    </thead>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{!! asset('plugins/datatables/plugin.min.js') !!}"></script>
+        <script src="{!! asset('assets/plugins/sweetalert2/script.min.js') !!}"></script>
+        <script src="{!! asset('assets/plugins/sweetalert2/make.js') !!}"></script>
+        <script>
+            let dataUrl = "{!! route('books.data') !!}";
+            let datatable = null;
+            $(document).ready(function() {
+                setTimeout(function() {
+                    datatable = $('#setting-default').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        responsive: true,
+                        language: datatablesLang,
+                        ajax: dataUrl,
+                        searching: true,
+                        columns: [
+                            {data: 'title', name: 'title'},
+                            {data: 'image_html', name: 'image_html', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
+                            {data: 'actions', name: 'actions', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
+                        ],
+                        order: [[0, 'asc']]
+                    });
+                    //makeDeleteBtn();
+                }, 350);
+            });
+        </script>
+    @endpush
+
+    @push('styles')
+        <link rel="stylesheet" href="{!! asset('plugins/datatables/plugin.min.css') !!}">
+    @endpush
 </x-app-layout>

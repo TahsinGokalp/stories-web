@@ -17,6 +17,8 @@
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        @stack('styles')
+
         <script>
             let lang = '{!! app()->getLocale() !!}';
             let localization = {
@@ -27,6 +29,11 @@
                     delete: '{!! __('Delete') !!}',
                     cancel: '{!! __('Cancel') !!}',
                 }
+            }
+            function htmldecode (str){
+                let txt = document.createElement('textarea');
+                txt.innerHTML = str;
+                return txt.value;
             }
         </script>
 
@@ -134,6 +141,8 @@
         </div>
 
         @stack('modals')
+
+        @stack('scripts')
 
         @livewireScripts
     </body>

@@ -45,6 +45,17 @@ mix.combine([
     'resources/plugins/lazy/jquery.lazy.plugins.js',
 ],'public/plugins/lazy/plugin.min.js');
 
+// Datatables
+mix.combine([
+    'resources/plugins/datatables/datatables.js',
+    'resources/plugins/datatables/tr.js',
+    'resources/plugins/datatables/make.js',
+],'public/plugins/datatables/plugin.min.js');
+
+mix.combine([
+    'resources/plugins/datatables/datatables.css',
+],'public/plugins/datatables/plugin.min.css').purgeCss();
+
 if (mix.inProduction()) {
     mix.version();
 }
