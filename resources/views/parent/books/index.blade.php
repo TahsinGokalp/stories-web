@@ -2,18 +2,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-                @if (session()->has('message'))
-                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
-                         role="alert">
-                        <div class="flex">
-                            <div>
-                                <p class="text-sm">{{ session('message') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endif
                 <a href="{{ route('books.add') }}"
-                        class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
+                   class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
                     Kitap Ekle
                 </a>
                 <table class="table-fixed w-full" id="setting-default">
@@ -30,9 +20,14 @@
         </div>
     </div>
     @push('scripts')
+        <script src="{!! asset('plugins/toastr/plugin.min.js') !!}"></script>
         <script src="{!! asset('plugins/datatables/plugin.min.js') !!}"></script>
-        <script src="{!! asset('assets/plugins/sweetalert2/script.min.js') !!}"></script>
-        <script src="{!! asset('assets/plugins/sweetalert2/make.js') !!}"></script>
+        <script src="{!! asset('plugins/sweetalert2/plugin.min.js') !!}"></script>
+        @if (session()->has('message'))
+            <script>
+                toastr.info("{{ session('message') }}");
+            </script>
+        @endif
         <script>
             let dataUrl = "{!! route('books.data') !!}";
             let datatable = null;
@@ -52,13 +47,14 @@
                         ],
                         order: [[0, 'asc']]
                     });
-                    //makeDeleteBtn();
+                    makeDeleteBtn();
                 }, 350);
             });
         </script>
     @endpush
 
     @push('styles')
+        <link rel="stylesheet" href="{!! asset('plugins/toastr/plugin.min.css') !!}">
         <link rel="stylesheet" href="{!! asset('plugins/datatables/plugin.min.css') !!}">
     @endpush
 </x-app-layout>

@@ -9,5 +9,8 @@
     "/plugins/howler/plugin.min.js": "/plugins/howler/plugin.min.js",
     "/plugins/lazy/plugin.min.js": "/plugins/lazy/plugin.min.js",
     "/plugins/datatables/plugin.min.js": "/plugins/datatables/plugin.min.js",
-    "/plugins/datatables/plugin.min.css": "/plugins/datatables/plugin.min.css"
+    "/plugins/datatables/plugin.min.css": "/plugins/datatables/plugin.min.css",
+    "/plugins/sweetalert2/plugin.min.js": "/plugins/sweetalert2/plugin.min.js",
+    "/plugins/toastr/plugin.min.js": "/plugins/toastr/plugin.min.js",
+    "/plugins/toastr/plugin.min.css": "/plugins/toastr/plugin.min.css"
 }

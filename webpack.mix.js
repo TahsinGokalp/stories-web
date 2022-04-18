@@ -56,6 +56,21 @@ mix.combine([
     'resources/plugins/datatables/datatables.css',
 ],'public/plugins/datatables/plugin.min.css').purgeCss();
 
+// Sweetalert 2
+mix.combine([
+    'resources/plugins/sweetalert2/sweetalert2.js',
+    'resources/plugins/sweetalert2/make.js',
+],'public/plugins/sweetalert2/plugin.min.js');
+
+// Toastr
+mix.combine([
+    'resources/plugins/toastr/toastr.js',
+],'public/plugins/toastr/plugin.min.js');
+
+mix.combine([
+    'resources/plugins/toastr/toastr.css',
+],'public/plugins/toastr/plugin.min.css').purgeCss();
+
 if (mix.inProduction()) {
     mix.version();
 }
