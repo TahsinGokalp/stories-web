@@ -12,6 +12,7 @@
                             <th class="px-4 py-2 w-40">Kitap Adı</th>
                             <th class="px-4 py-2">Kitap Resmi</th>
                             <th class="px-4 py-2">Sayfa Sayısı</th>
+                            <th class="px-4 py-2">Kitap Türü</th>
                             <th class="px-4 py-2">İşlemler</th>
                         </tr>
                     </thead>
@@ -45,6 +46,7 @@
                             {data: 'title', name: 'title'},
                             {data: 'image_html', name: 'image_html', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
                             {data: 'total_pages', name: 'total_pages', orderable: false, searchable: false},
+                            {data: 'audio_book_text', name: 'audio_book_text', orderable: false, searchable: false},
                             {data: 'actions', name: 'actions', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
                         ],
                         order: [[0, 'asc']]

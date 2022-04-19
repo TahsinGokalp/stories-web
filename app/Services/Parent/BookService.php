@@ -32,6 +32,8 @@ class BookService
                 return '<img src="'.route('books.serve', $item->id).'" class="max-w-full h-auto rounded-lg text-center" style="height:200px;">';
             })->addColumn('total_pages', function ($item) {
                 return $item->total_pages;
+            })->addColumn('audio_book_text', function ($item) {
+                return $item->audio_book_text;
             })->addColumn('actions', function ($item) {
                 return '<a href="'.route('books.page', $item->id).'" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">Sayfalar</a>'.
                        '<a href="'.route('books.edit', $item->id).'" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">Düzenle</a>'.
@@ -82,6 +84,7 @@ class BookService
         }
         $item->title = $request['title'];
         $item->cover = $this->uploadCover($item, $request);
+        $item->audio_book = $request['audio_book'];
         try {
             $item->save();
         } catch (Exception $e) {

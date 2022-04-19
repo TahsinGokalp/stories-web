@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @mixin \Eloquent
  *
  * @property-read mixed $total_pages
+ * @property-read string $audio_book_text
  */
 class Book extends Model
 {
@@ -43,5 +44,11 @@ class Book extends Model
     public function getTotalPagesAttribute()
     {
         return $this->hasMany(BookPage::class, 'book_id', 'id')->count();
+    }
+
+    public function getAudioBookTextAttribute()
+    {
+        $audioBook = (int)$this->attributes['audio_book'];
+        return ($audioBook === 1) ? 'Sesli Kitap' : 'Kitap';
     }
 }

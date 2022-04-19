@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveBookRequest extends FormRequest
 {
@@ -26,6 +27,11 @@ class SaveBookRequest extends FormRequest
         return [
             'title' => 'required|string',
             'cover' => 'required|image',
+            'audio_book' => [
+                'required',
+                'numeric',
+                Rule::in([0, 1]),
+            ],
         ];
     }
 }
