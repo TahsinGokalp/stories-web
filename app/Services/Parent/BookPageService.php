@@ -2,7 +2,6 @@
 
 namespace App\Services\Parent;
 
-use Yajra\DataTables\Facades\DataTables;
 use function __;
 use App\Models\BookPage;
 use Exception;
@@ -16,6 +15,7 @@ use Response;
 use function response;
 use function storage_path;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Yajra\DataTables\Facades\DataTables;
 
 class BookPageService
 {
@@ -33,10 +33,10 @@ class BookPageService
     {
         $model = BookPage::where('book_id', $bookId);
         try {
-            return DataTables::of($model)->addColumn('image_html', function ($item) use($bookId) {
+            return DataTables::of($model)->addColumn('image_html', function ($item) use ($bookId) {
                 return '<img src="'.route('books.page.serve', [$bookId, $item->id]).'" class="max-w-full h-auto rounded-lg text-center" style="height:200px;">';
-            })->addColumn('actions', function ($item) use($bookId) {
-                return '<a href="' . route('books.page.edit', [$bookId, $item->id]) . '" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">Düzenle</a>'.
+            })->addColumn('actions', function ($item) use ($bookId) {
+                return '<a href="'.route('books.page.edit', [$bookId, $item->id]).'" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">Düzenle</a>'.
                     '<a href="'.route('books.page.delete', [$bookId, $item->id]).'" class="delete-btn my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">Sil</a>';
             })->toJson();
         } catch (Exception $e) {
