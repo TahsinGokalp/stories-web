@@ -26,9 +26,12 @@ class BookController extends Controller
 
     public function index(): Factory|View|Application
     {
-        return view('parent.books.index', [
-            'books' => $this->book->all(),
-        ]);
+        return view('parent.books.index');
+    }
+
+    public function data(): ?JsonResponse
+    {
+        return $this->book->data();
     }
 
     public function add(): Factory|View|Application

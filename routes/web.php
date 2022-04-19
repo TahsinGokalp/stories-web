@@ -17,7 +17,6 @@ Route::middleware([
     'verified',
     'role:'.User::CHILD,
 ])->group(callback: function () {
-
     Route::prefix('books')->group(function () {
         //Home
         Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
@@ -28,7 +27,6 @@ Route::middleware([
         //Book Detail
         Route::get('{id}', [ChildBookController::class, 'show'])->name('child.books.show');
     });
-
 });
 
 //Parent Panel
@@ -39,12 +37,10 @@ Route::middleware([
     'role:'.User::PARENT,
 ])->prefix('admin')->group(callback: function () {
 
-    //Home
-    Route::get('/', static function () {return view('dashboard'); })->name('dashboard');
-
     //Books
     Route::prefix('books')->group(function () {
         Route::get('/', [ParentBookController::class, 'index'])->name('books');
+        Route::get('data', [ParentBookController::class, 'data'])->name('books.data');
         Route::get('add', [ParentBookController::class, 'add'])->name('books.add');
         Route::post('save', [ParentBookController::class, 'save'])->name('books.save');
         Route::get('edit/{id}', [ParentBookController::class, 'edit'])->name('books.edit');
@@ -56,6 +52,7 @@ Route::middleware([
     //Book Pages
     Route::prefix('book-pages/{bookId}')->group(function () {
         Route::get('/', [ParentBookPageController::class, 'index'])->name('books.page');
+        Route::get('data', [ParentBookPageController::class, 'data'])->name('books.page.data');
         Route::get('add', [ParentBookPageController::class, 'add'])->name('books.page.add');
         Route::post('save', [ParentBookPageController::class, 'save'])->name('books.page.save');
         Route::get('edit/{id}', [ParentBookPageController::class, 'edit'])->name('books.page.edit');
@@ -63,5 +60,4 @@ Route::middleware([
         Route::post('delete/{id}', [ParentBookPageController::class, 'delete'])->name('books.page.delete');
         Route::get('serve/{id}', [ParentBookPageController::class, 'serve'])->name('books.page.serve');
     });
-
 });

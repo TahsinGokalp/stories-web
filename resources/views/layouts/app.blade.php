@@ -4,6 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -13,9 +20,9 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="{{ asset('plugins/jquery/plugin.min.js') }}"></script>
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @stack('styles')
 
         <script>
             let lang = '{!! app()->getLocale() !!}';
@@ -28,83 +35,11 @@
                     cancel: '{!! __('Cancel') !!}',
                 }
             }
-        </script>
-
-        <script>
-            function makeDeleteBtn(body = {}, container = null, selector = null, title = null, text = null, deleteText = null, cancel = null, redirect = null, refresh = true){
-                if(container == null){
-                    container = 'body';
-                }
-                if(selector == null){
-                    selector = '.delete-btn';
-                }
-                if(title == null){
-                    title = localization.sweetalert2.title;
-                }
-                if(text == null){
-                    text = localization.sweetalert2.text
-                }
-                if(deleteText == null){
-                    deleteText = localization.sweetalert2.delete;
-                }
-                if(cancel == null){
-                    cancel = localization.sweetalert2.cancel;
-                }
-                return $(container).on('click', selector, function (event){
-                    let url = $(this).attr('href');
-                    event.preventDefault();
-                    Swal.fire({
-                        title: title,
-                        text: text,
-                        showCancelButton: true,
-                        confirmButtonText: deleteText,
-                        showLoaderOnConfirm: true,
-                        cancelButtonText: cancel,
-                        preConfirm: () => {
-                            return fetch(url, {
-                                method: "post",
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json',
-                                    "X-CSRF-Token": $('input[name="_token"]').val()
-                                },
-                                body: JSON.stringify(body)
-                            }).then(response => {
-                                if(!response.status) {
-                                    throw new Error(response.message);
-                                }
-                                return response.json()
-                            }).catch(error => {
-                                Swal.showValidationMessage(
-                                    localization.whoops
-                                );
-                            }).then((result) => {
-                                if(result.status == 'ERROR'){
-                                    toastr.error(result.message);
-                                    return;
-                                }
-                                if(refresh){
-                                    window.location.reload();
-                                }else{
-                                    if(redirect == null){
-                                        datatable.ajax.reload();
-                                        toastr.success("İşlem tamamlandı.")
-                                    }else{
-                                        window.location = redirect;
-                                    }
-                                }
-                            });
-                        },
-                        allowOutsideClick: () => !Swal.isLoading()
-                    });
-                });
+            function htmldecode (str){
+                let txt = document.createElement('textarea');
+                txt.innerHTML = str;
+                return txt.value;
             }
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                makeDeleteBtn();
-            });
         </script>
 
         @livewireStyles
@@ -134,6 +69,8 @@
         </div>
 
         @stack('modals')
+
+        @stack('scripts')
 
         @livewireScripts
     </body>

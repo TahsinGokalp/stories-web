@@ -5,7 +5,6 @@ namespace App\Services\Parent;
 use function __;
 use App\Models\BookPage;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +15,7 @@ use Response;
 use function response;
 use function storage_path;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Yajra\DataTables\Facades\DataTables;
 
 class BookPageService
 {
@@ -29,9 +29,21 @@ class BookPageService
         return storage_path('sound/'.$sound);
     }
 
-    public function all($id): Collection
+    public function data($bookId): ?JsonResponse
     {
-        return BookPage::where('book_id', $id)->get();
+        $model = BookPage::where('book_id', $bookId);
+        try {
+            return DataTables::of($model)->addColumn('image_html', function ($item) use ($bookId) {
+                return '<img src="'.route('books.page.serve', [$bookId, $item->id]).'" class="max-w-full h-auto rounded-lg text-center" style="height:200px;">';
+            })->addColumn('actions', function ($item) use ($bookId) {
+                return '<a href="'.route('books.page.edit', [$bookId, $item->id]).'" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">Düzenle</a>'.
+                    '<a href="'.route('books.page.delete', [$bookId, $item->id]).'" class="delete-btn my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">Sil</a>';
+            })->toJson();
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return response()->json([]);
+        }
     }
 
     public function get($id): BookPage
@@ -41,12 +53,12 @@ class BookPageService
 
     public function uploadImage(BookPage $book, $request): ?string
     {
-        if($request->hasFile('image') && $request->file('image')->isValid()){
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $file = $request->file('image');
             $destinationPath = $this->coverPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->image !== null && File::exists($this->coverPath($book->image))){
+            if ($book->image !== null && File::exists($this->coverPath($book->image))) {
                 unlink($this->coverPath($book->image));
             }
 
@@ -58,12 +70,12 @@ class BookPageService
 
     public function uploadSound(BookPage $book, $request): ?string
     {
-        if($request->hasFile('sound') && $request->file('sound')->isValid()){
+        if ($request->hasFile('sound') && $request->file('sound')->isValid()) {
             $file = $request->file('sound');
             $destinationPath = $this->soundPath();
             $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
-            if($book->sound !== null && File::exists($this->soundPath($book->sound))){
+            if ($book->sound !== null && File::exists($this->soundPath($book->sound))) {
                 unlink($this->soundPath($book->sound));
             }
 
@@ -82,9 +94,9 @@ class BookPageService
 
     public function saveItem($bookId, $request): void
     {
-        if(isset($request['id'])){
+        if (isset($request['id'])) {
             $item = $this->get($request['id']);
-        }else{
+        } else {
             $item = new BookPage();
             $item->book_id = $bookId;
         }
@@ -104,7 +116,7 @@ class BookPageService
     {
         try {
             $item = $this->get($id);
-            if(File::exists($this->coverPath($item->image))){
+            if (File::exists($this->coverPath($item->image))) {
                 unlink($this->coverPath($item->image));
             }
             $item->delete();

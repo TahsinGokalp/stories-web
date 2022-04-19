@@ -45,6 +45,34 @@ mix.combine([
     'resources/plugins/lazy/jquery.lazy.plugins.js',
 ],'public/plugins/lazy/plugin.min.js');
 
+// Datatables
+mix.combine([
+    'resources/plugins/datatables/datatables.js',
+    'resources/plugins/datatables/tr.js',
+    'resources/plugins/datatables/make.js',
+],'public/plugins/datatables/plugin.min.js');
+
+mix.combine([
+    'resources/plugins/datatables/datatables.css',
+],'public/plugins/datatables/plugin.min.css').purgeCss();
+
+mix.copyDirectory('resources/plugins/datatables/images', 'public/plugins/datatables/images');
+
+// Sweetalert 2
+mix.combine([
+    'resources/plugins/sweetalert2/sweetalert2.js',
+    'resources/plugins/sweetalert2/make.js',
+],'public/plugins/sweetalert2/plugin.min.js');
+
+// Toastr
+mix.combine([
+    'resources/plugins/toastr/toastr.js',
+],'public/plugins/toastr/plugin.min.js');
+
+mix.combine([
+    'resources/plugins/toastr/toastr.css',
+],'public/plugins/toastr/plugin.min.css').purgeCss();
+
 if (mix.inProduction()) {
     mix.version();
 }

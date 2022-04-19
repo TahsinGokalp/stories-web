@@ -7,5 +7,15 @@
     "/plugins/bookblock/plugin.min.js": "/plugins/bookblock/plugin.min.js",
     "/plugins/bookblock/plugin.min.css": "/plugins/bookblock/plugin.min.css",
     "/plugins/howler/plugin.min.js": "/plugins/howler/plugin.min.js",
-    "/plugins/lazy/plugin.min.js": "/plugins/lazy/plugin.min.js"
+    "/plugins/lazy/plugin.min.js": "/plugins/lazy/plugin.min.js",
+    "/plugins/datatables/plugin.min.js": "/plugins/datatables/plugin.min.js",
+    "/plugins/datatables/plugin.min.css": "/plugins/datatables/plugin.min.css",
+    "/plugins/datatables/images/sort_asc.png": "/plugins/datatables/images/sort_asc.png",
+    "/plugins/datatables/images/sort_asc_disabled.png": "/plugins/datatables/images/sort_asc_disabled.png",
+    "/plugins/datatables/images/sort_both.png": "/plugins/datatables/images/sort_both.png",
+    "/plugins/datatables/images/sort_desc.png": "/plugins/datatables/images/sort_desc.png",
+    "/plugins/datatables/images/sort_desc_disabled.png": "/plugins/datatables/images/sort_desc_disabled.png",
+    "/plugins/sweetalert2/plugin.min.js": "/plugins/sweetalert2/plugin.min.js",
+    "/plugins/toastr/plugin.min.js": "/plugins/toastr/plugin.min.js",
+    "/plugins/toastr/plugin.min.css": "/plugins/toastr/plugin.min.css"
 }

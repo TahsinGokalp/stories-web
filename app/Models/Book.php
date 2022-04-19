@@ -25,6 +25,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Book whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Book whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
+ * @property-read mixed $total_pages
+ * @property-read string $audio_book_text
  */
 class Book extends Model
 {
@@ -36,5 +39,17 @@ class Book extends Model
     public function pages(): HasMany
     {
         return $this->hasMany(BookPage::class, 'book_id', 'id');
+    }
+
+    public function getTotalPagesAttribute()
+    {
+        return $this->hasMany(BookPage::class, 'book_id', 'id')->count();
+    }
+
+    public function getAudioBookTextAttribute()
+    {
+        $audioBook = (int) $this->attributes['audio_book'];
+
+        return ($audioBook === 1) ? 'Sesli Kitap' : 'Kitap';
     }
 }
