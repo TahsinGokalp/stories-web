@@ -32,7 +32,7 @@ class BookService
                 return '<img src="'.route('books.serve', $item->id).'" class="max-w-full h-auto rounded-lg text-center" style="height:200px;">';
             })->addColumn('actions', function ($item) {
                 return '<a href="'.route('books.page', $item->id).'" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">Sayfalar</a>'.
-                       '<a href="' . route('books.edit', $item->id) . '" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">Düzenle</a>'.
+                       '<a href="'.route('books.edit', $item->id).'" class="my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base font-bold text-white shadow-sm hover:bg-indigo-700">Düzenle</a>'.
                        '<a href="'.route('books.delete', $item->id).'" class="delete-btn my-4 inline-flex justify-center mr-2 rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-bold text-white shadow-sm hover:bg-red-700">Sil</a>';
             })->toJson();
         } catch (Exception $e) {
