@@ -52,6 +52,7 @@ Route::middleware([
     //Book Pages
     Route::prefix('book-pages/{bookId}')->group(function () {
         Route::get('/', [ParentBookPageController::class, 'index'])->name('books.page');
+        Route::get('data', [ParentBookPageController::class, 'data'])->name('books.page.data');
         Route::get('add', [ParentBookPageController::class, 'add'])->name('books.page.add');
         Route::post('save', [ParentBookPageController::class, 'save'])->name('books.page.save');
         Route::get('edit/{id}', [ParentBookPageController::class, 'edit'])->name('books.page.edit');

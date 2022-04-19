@@ -56,6 +56,8 @@ mix.combine([
     'resources/plugins/datatables/datatables.css',
 ],'public/plugins/datatables/plugin.min.css').purgeCss();
 
+mix.copyDirectory('resources/plugins/datatables/images', 'public/plugins/datatables/images');
+
 // Sweetalert 2
 mix.combine([
     'resources/plugins/sweetalert2/sweetalert2.js',

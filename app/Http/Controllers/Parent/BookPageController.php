@@ -28,8 +28,12 @@ class BookPageController extends Controller
     {
         return view('parent.books.pages.index', [
             'bookId' => $bookId,
-            'pages' => $this->book->all($bookId),
         ]);
+    }
+
+    public function data($bookId): ?JsonResponse
+    {
+        return $this->book->data($bookId);
     }
 
     public function add($bookId): Factory|View|Application
