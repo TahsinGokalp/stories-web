@@ -48,7 +48,8 @@ class Book extends Model
 
     public function getAudioBookTextAttribute()
     {
-        $audioBook = (int)$this->attributes['audio_book'];
+        $audioBook = (int) $this->attributes['audio_book'];
+
         return ($audioBook === 1) ? 'Sesli Kitap' : 'Kitap';
     }
 }
