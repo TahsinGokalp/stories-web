@@ -37,4 +37,9 @@ class Book extends Model
     {
         return $this->hasMany(BookPage::class, 'book_id', 'id');
     }
+
+    public function getTotalPagesAttribute()
+    {
+        return $this->hasMany(BookPage::class, 'book_id', 'id')->count();
+    }
 }

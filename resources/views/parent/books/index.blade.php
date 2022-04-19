@@ -11,10 +11,11 @@
                         <tr class="bg-gray-100">
                             <th class="px-4 py-2 w-40">Kitap Adı</th>
                             <th class="px-4 py-2">Kitap Resmi</th>
+                            <th class="px-4 py-2">Sayfa Sayısı</th>
                             <th class="px-4 py-2">İşlemler</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="text-center"></tbody>
                 </table>
             </div>
         </div>
@@ -43,6 +44,7 @@
                         columns: [
                             {data: 'title', name: 'title'},
                             {data: 'image_html', name: 'image_html', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
+                            {data: 'total_pages', name: 'total_pages', orderable: false, searchable: false},
                             {data: 'actions', name: 'actions', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
                         ],
                         order: [[0, 'asc']]
