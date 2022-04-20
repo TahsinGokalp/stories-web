@@ -5,3 +5,8 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
+
+
+# Attribution
+
+* <a href="https://www.vecteezy.com/free-vector/kids-book-cover">Kids Book Cover Vectors - Vecteezy</a>

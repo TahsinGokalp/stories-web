@@ -11,6 +11,13 @@ function playSound(page){
         sound.play();
     }
 }
+function loadPage(page){
+    let img = $("#book-page-"+(page+1));
+    if(img.hasClass("lazy")){
+        let src = img.attr("data-src");
+        img.attr("src", src).removeAttr("data-src").removeClass("lazy");
+    }
+}
 var Page = (function() {
     var config = {
             $bookBlock : $( '#bb-bookblock' ),
@@ -31,6 +38,8 @@ var Page = (function() {
                 circular	: false,
                 autoplay        : false,
                 onEndFlip	: function( old, page, isLimit ) {
+                    loadPage(page);
+                    loadPage(page+1)
                     playSound(page+1);
                     return false;
                 },
