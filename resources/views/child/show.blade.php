@@ -25,7 +25,7 @@
             @foreach($book->pages as $page)
                 <div class="bb-item">
                     <div class="bb-custom-side">
-                        <img data-src="{{ route('child.books.page', $page->id) }}" class="hw-100 lazy" />
+                        <img src="{{ asset('images/cover.png') }}" data-src="{{ route('child.books.page', $page->id) }}" class="hw-100 lazy" id="book-page-{{ $page->id }}" />
                     </div>
                 </div>
             @endforeach
@@ -43,7 +43,6 @@
 <script src="{{ asset('plugins/jquery/plugin.min.js') }}"></script>
 <script src="{{ asset('plugins/howler/plugin.min.js') }}"></script>
 <script src="{{ asset('plugins/bookblock/plugin.min.js') }}"></script>
-<script src="{{ asset('plugins/lazy/plugin.min.js') }}"></script>
 <script>
     var soundFiles = {
         @foreach($book->pages as $page)
@@ -54,7 +53,7 @@
     };
     $(function() {
         $('.blur').css("filter","blur(10px)");
-        $('.lazy').Lazy();
+        loadPage(0);
     });
     $('.start').click(function (){
         playSound(1);
