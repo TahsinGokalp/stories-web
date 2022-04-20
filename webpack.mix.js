@@ -8,6 +8,8 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
+mix.copyDirectory('resources/images', 'public/images');
+
 // Books
 mix.combine([
     'resources/css/bootstrap.css',

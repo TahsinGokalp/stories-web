@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/images/cover.png": "/images/cover.png",
     "/css/books.css": "/css/books.css",
     "/plugins/jquery/plugin.min.js": "/plugins/jquery/plugin.min.js",
     "/plugins/modernizr/plugin.min.js": "/plugins/modernizr/plugin.min.js",
