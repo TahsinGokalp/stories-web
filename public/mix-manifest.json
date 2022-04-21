@@ -18,5 +18,7 @@
     "/plugins/datatables/images/sort_desc_disabled.png": "/plugins/datatables/images/sort_desc_disabled.png",
     "/plugins/sweetalert2/plugin.min.js": "/plugins/sweetalert2/plugin.min.js",
     "/plugins/toastr/plugin.min.js": "/plugins/toastr/plugin.min.js",
-    "/plugins/toastr/plugin.min.css": "/plugins/toastr/plugin.min.css"
+    "/plugins/toastr/plugin.min.css": "/plugins/toastr/plugin.min.css",
+    "/plugins/dropzone/plugin.min.js": "/plugins/dropzone/plugin.min.js",
+    "/plugins/dropzone/plugin.min.css": "/plugins/dropzone/plugin.min.css"
 }

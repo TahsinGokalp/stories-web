@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Parent;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveBookPageRequest;
+use App\Http\Requests\SaveMultipleBookPageRequest;
 use App\Http\Requests\UpdateBookPageRequest;
 use App\Services\Parent\BookPageService;
 use Illuminate\Contracts\Foundation\Application;
@@ -50,6 +51,20 @@ class BookPageController extends Controller
         return redirect()->route('books.page', $bookId)->with([
             'message' => 'Sayfa eklendi.',
         ]);
+    }
+
+    public function addMultiple($bookId): Factory|View|Application
+    {
+        return view('parent.books.pages.multiple', [
+            'bookId' => $bookId,
+        ]);
+    }
+
+    public function saveMultiple($bookId, SaveMultipleBookPageRequest $request): JsonResponse
+    {
+        $this->book->saveMultipleItem($bookId, $request);
+
+        return response()->json(['status' => 'OK']);
     }
 
     public function edit($bookId, $id): Factory|View|Application

@@ -55,6 +55,8 @@ Route::middleware([
         Route::get('data', [ParentBookPageController::class, 'data'])->name('books.page.data');
         Route::get('add', [ParentBookPageController::class, 'add'])->name('books.page.add');
         Route::post('save', [ParentBookPageController::class, 'save'])->name('books.page.save');
+        Route::get('add/multiple', [ParentBookPageController::class, 'addMultiple'])->name('books.page.add.multiple');
+        Route::post('save/multiple', [ParentBookPageController::class, 'saveMultiple'])->name('books.page.save.multiple');
         Route::get('edit/{id}', [ParentBookPageController::class, 'edit'])->name('books.page.edit');
         Route::post('update/{id}', [ParentBookPageController::class, 'update'])->name('books.page.update');
         Route::post('delete/{id}', [ParentBookPageController::class, 'delete'])->name('books.page.delete');

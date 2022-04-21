@@ -75,6 +75,15 @@ mix.combine([
     'resources/plugins/toastr/toastr.css',
 ],'public/plugins/toastr/plugin.min.css').purgeCss();
 
+// Dropzone
+mix.combine([
+    'resources/plugins/dropzone/dropzone.js',
+],'public/plugins/dropzone/plugin.min.js');
+
+mix.combine([
+    'resources/plugins/dropzone/dropzone.css',
+],'public/plugins/dropzone/plugin.min.css').purgeCss();
+
 if (mix.inProduction()) {
     mix.version();
 }
