@@ -6,7 +6,7 @@
                    class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
                     Kitap Ekle
                 </a>
-                <table class="table-fixed w-full" id="setting-default">
+                <table class="table-fixed w-full" id="setting-default" aria-describedby="Kitaplar">
                     <thead>
                         <tr class="bg-gray-100">
                             <th class="px-4 py-2 w-40">Kitap Adı</th>
