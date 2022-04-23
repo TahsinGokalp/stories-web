@@ -2,9 +2,9 @@
 
 namespace App\Services\Parent;
 
-use App\Models\BookPage;
 use function __;
 use App\Models\Book;
+use App\Models\BookPage;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
@@ -103,7 +103,7 @@ class BookService
                 unlink($this->coverPath($item->cover));
             }
             $pages = BookPage::where('book_id', $id)->get();
-            foreach($pages as $page){
+            foreach ($pages as $page) {
                 if ($page->image !== null && File::exists($this->coverPath($page->image))) {
                     unlink($this->coverPath($page->image));
                 }
@@ -120,7 +120,6 @@ class BookService
                 ((int) $e->getCode() === 23000) ? 'Seçilen öğeye bağlı veri bulunmaktadır. Verileri sildikten sonra tekrar deneyebilirsiniz.' : __('Whoops, something went wrong on our servers.')
             );
         } catch (Exception) {
-
             return Response::message('ERROR', __('Whoops, something went wrong on our servers.'));
         }
 
