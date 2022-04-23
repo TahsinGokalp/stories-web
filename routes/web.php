@@ -3,6 +3,7 @@
 use App\Http\Controllers\Child\BookController as ChildBookController;
 use App\Http\Controllers\Parent\BookController as ParentBookController;
 use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
+use App\Http\Controllers\Parent\ExportController;
 use App\Http\Controllers\RedirectController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -62,4 +63,11 @@ Route::middleware([
         Route::post('delete/{id}', [ParentBookPageController::class, 'delete'])->name('books.page.delete');
         Route::get('serve/{id}', [ParentBookPageController::class, 'serve'])->name('books.page.serve');
     });
+
+    //Book Export
+    Route::prefix('books/export')->group(function () {
+        Route::get('/', [ExportController::class, 'index'])->name('export');
+        Route::post('download', [ExportController::class, 'download'])->name('export.download');
+    });
+
 });
