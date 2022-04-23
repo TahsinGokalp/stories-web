@@ -4,6 +4,7 @@ use App\Http\Controllers\Child\BookController as ChildBookController;
 use App\Http\Controllers\Parent\BookController as ParentBookController;
 use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
 use App\Http\Controllers\Parent\ExportController;
+use App\Http\Controllers\Parent\UsageController;
 use App\Http\Controllers\RedirectController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,11 @@ Route::middleware([
         Route::post('update/{id}', [ParentBookPageController::class, 'update'])->name('books.page.update');
         Route::post('delete/{id}', [ParentBookPageController::class, 'delete'])->name('books.page.delete');
         Route::get('serve/{id}', [ParentBookPageController::class, 'serve'])->name('books.page.serve');
+    });
+
+    //Usage
+    Route::prefix('usage')->group(function () {
+        Route::get('/', [UsageController::class, 'index'])->name('usage');
     });
 
     //Book Export
