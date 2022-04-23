@@ -2,6 +2,7 @@
 
 namespace App\Services\Parent;
 
+use App\Models\BookPage;
 use function __;
 use App\Models\Book;
 use Exception;
@@ -101,6 +102,16 @@ class BookService
             if (File::exists($this->coverPath($item->cover))) {
                 unlink($this->coverPath($item->cover));
             }
+            $pages = BookPage::where('book_id', $id)->get();
+            foreach($pages as $page){
+                if ($page->image !== null && File::exists($this->coverPath($page->image))) {
+                    unlink($this->coverPath($page->image));
+                }
+                if ($page->sound !== null && File::exists(storage_path('sound/'.$page->sound))) {
+                    unlink(storage_path('sound/'.$page->sound));
+                }
+                $page->delete();
+            }
             $item->delete();
         } catch (PDOException $e) {
             Log::error($e);
@@ -109,6 +120,7 @@ class BookService
                 ((int) $e->getCode() === 23000) ? 'Seçilen öğeye bağlı veri bulunmaktadır. Verileri sildikten sonra tekrar deneyebilirsiniz.' : __('Whoops, something went wrong on our servers.')
             );
         } catch (Exception) {
+
             return Response::message('ERROR', __('Whoops, something went wrong on our servers.'));
         }
 
