@@ -68,6 +68,20 @@ class BookPageService
         return $book->image ?? null;
     }
 
+    public function uploadMultipleImage($request): ?string
+    {
+        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $destinationPath = $this->coverPath();
+            $filename = Str::slug($file->getClientOriginalName()).'-'.Str::random(10).'.'.$file->getClientOriginalExtension();
+            $file->move($destinationPath, $filename);
+
+            return $filename;
+        }
+
+        return null;
+    }
+
     public function uploadSound(BookPage $book, $request): ?string
     {
         if ($request->hasFile('sound') && $request->file('sound')->isValid()) {
@@ -90,6 +104,19 @@ class BookPageService
         redirect()->back()->withErrors([
             __('Whoops, something went wrong on our servers.').$e,
         ])->withInput()->throwResponse();
+    }
+
+    public function saveMultipleItem($bookId, $request): void
+    {
+        $item = new BookPage();
+        $item->book_id = $bookId;
+        $item->image = $this->uploadMultipleImage($request);
+        try {
+            $item->save();
+        } catch (Exception $e) {
+            Log::error($e);
+            response('Bir hata oluştu', 500)->throwResponse();
+        }
     }
 
     public function saveItem($bookId, $request): void

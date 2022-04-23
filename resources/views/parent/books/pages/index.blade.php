@@ -2,11 +2,15 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+                <a href="{{ route('books.page.add.multiple', $bookId) }}"
+                   class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
+                    Çoklu Sayfa Ekle
+                </a>
                 <a href="{{ route('books.page.add', $bookId) }}"
-                        class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
+                        class="my-4 inline-flex justify-center mr-2 float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
                     Sayfa Ekle
                 </a>
-                <table class="table-fixed w-full" id="setting-default">
+                <table class="table-fixed w-full" id="setting-default" aria-describedby="Kitap Sayfaları">
                     <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 w-40">Sıra</th>

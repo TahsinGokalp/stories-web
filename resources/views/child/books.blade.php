@@ -13,7 +13,7 @@
             @foreach($books as $book)
                 <div class="col-lg-3 col-md-3 col-sm-4 mt-3">
                     <div class='book'>
-                        <img src="{{ asset('images/cover.png') }}" data-src="{{ route('child.books.cover', $book->id) }}" onclick="window.location.href='{{ route('child.books.show', $book->id) }}'" class="lazy" alt="{{ $book->title }}" />
+                        <img src="{{ asset('images/cover.png') }}" alt="{{ $book->title }}" data-src="{{ route('child.books.cover', $book->id) }}" onclick="window.location.href='{{ route('child.books.show', $book->id) }}'" class="lazy" alt="{{ $book->title }}" />
                     </div>
                 </div>
             @endforeach

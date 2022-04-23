@@ -2,19 +2,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-                <a href="{{ route('books.add') }}"
+                <a href="{{ route('users.add') }}"
                    class="my-4 inline-flex justify-center float-right rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-bold text-white shadow-sm hover:bg-blue-700">
-                    Kitap Ekle
+                    Kullanıcı Ekle
                 </a>
                 <table class="table-fixed w-full" id="setting-default" aria-describedby="Kitaplar">
                     <thead>
-                        <tr class="bg-gray-100">
-                            <th class="px-4 py-2 w-40">Kitap Adı</th>
-                            <th class="px-4 py-2">Kitap Resmi</th>
-                            <th class="px-4 py-2">Sayfa Sayısı</th>
-                            <th class="px-4 py-2">Kitap Türü</th>
-                            <th class="px-4 py-2">İşlemler</th>
-                        </tr>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2 w-40">Email</th>
+                        <th class="px-4 py-2">Ad Soyad</th>
+                        <th class="px-4 py-2">İşlemler</th>
+                    </tr>
                     </thead>
                     <tbody class="text-center"></tbody>
                 </table>
@@ -31,7 +29,7 @@
             </script>
         @endif
         <script>
-            let dataUrl = "{!! route('books.data') !!}";
+            let dataUrl = "{!! route('users.data') !!}";
             let datatable = null;
             $(document).ready(function() {
                 setTimeout(function() {
@@ -43,10 +41,8 @@
                         ajax: dataUrl,
                         searching: true,
                         columns: [
-                            {data: 'title', name: 'title'},
-                            {data: 'image_html', name: 'image_html', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
-                            {data: 'total_pages', name: 'total_pages', orderable: false, searchable: false},
-                            {data: 'audio_book_text', name: 'audio_book_text', orderable: false, searchable: false},
+                            {data: 'email', name: 'email'},
+                            {data: 'name', name: 'name'},
                             {data: 'actions', name: 'actions', orderable: false, searchable: false, "render": function ( data ) {return htmldecode(data);}},
                         ],
                         order: [[0, 'asc']]

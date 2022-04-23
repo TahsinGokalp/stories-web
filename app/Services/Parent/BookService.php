@@ -4,6 +4,7 @@ namespace App\Services\Parent;
 
 use function __;
 use App\Models\Book;
+use App\Models\BookPage;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
@@ -100,6 +101,16 @@ class BookService
             $item = $this->get($id);
             if (File::exists($this->coverPath($item->cover))) {
                 unlink($this->coverPath($item->cover));
+            }
+            $pages = BookPage::where('book_id', $id)->get();
+            foreach ($pages as $page) {
+                if ($page->image !== null && File::exists($this->coverPath($page->image))) {
+                    unlink($this->coverPath($page->image));
+                }
+                if ($page->sound !== null && File::exists(storage_path('sound/'.$page->sound))) {
+                    unlink(storage_path('sound/'.$page->sound));
+                }
+                $page->delete();
             }
             $item->delete();
         } catch (PDOException $e) {
