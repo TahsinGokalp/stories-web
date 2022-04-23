@@ -7,8 +7,8 @@ use App\Models\BookPage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use JsonException;
-use ZipArchive;
 use function storage_path;
+use ZipArchive;
 
 class ImportService
 {
@@ -16,7 +16,7 @@ class ImportService
     {
         $filename = $this->uploadCover($request);
         $directory = $this->createDirectory();
-        if(!$this->unzip($directory, $filename)){
+        if (! $this->unzip($directory, $filename)) {
             $this->deleteDirectory($directory);
             $this->deleteZip($filename);
 
@@ -25,7 +25,7 @@ class ImportService
             ])->withInput()->throwResponse();
         }
         $book = $this->createBook($directory);
-        if($book === null){
+        if ($book === null) {
             $this->deleteDirectory($directory);
             $this->deleteZip($filename);
 
@@ -81,7 +81,7 @@ class ImportService
     private function unzip($directory, $filename): bool
     {
         $zip = new ZipArchive;
-        if ($zip->open(storage_path('import/'.$filename)) === TRUE) {
+        if ($zip->open(storage_path('import/'.$filename)) === true) {
             $zip->extractTo($directory);
             $zip->close();
 
@@ -102,7 +102,7 @@ class ImportService
             $book->audio_book = $json->book->audio_book;
             $book->save();
 
-            foreach($json->pages as $page){
+            foreach ($json->pages as $page) {
                 $item = new BookPage();
                 $item->book_id = $book->id;
                 $item->page_order = $page->page_order;
