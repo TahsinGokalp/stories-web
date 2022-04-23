@@ -2,17 +2,17 @@
 
 namespace App\Services\Parent;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 use function __;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use PDOException;
 use function redirect;
 use Response;
 use function response;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserService
@@ -54,12 +54,12 @@ class UserService
         }
         $item->name = $request['name'];
         $item->email = $request['email'];
-        if(!empty($request['password'])){
+        if (! empty($request['password'])) {
             $item->password = Hash::make($request['password']);
         }
         try {
             $item->save();
-            if(isset($role)){
+            if (isset($role)) {
                 $item->assignRole($role);
             }
         } catch (Exception $e) {
@@ -86,5 +86,4 @@ class UserService
 
         return Response::message('OK');
     }
-
 }
