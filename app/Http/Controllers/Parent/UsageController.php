@@ -24,5 +24,4 @@ class UsageController extends Controller
             'usage' => $this->usage->get(),
         ]);
     }
-
 }
