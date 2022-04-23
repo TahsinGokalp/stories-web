@@ -69,5 +69,4 @@ Route::middleware([
         Route::get('/', [ExportController::class, 'index'])->name('export');
         Route::post('download', [ExportController::class, 'download'])->name('export.download');
     });
-
 });

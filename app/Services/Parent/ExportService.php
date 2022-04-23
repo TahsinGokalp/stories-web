@@ -2,28 +2,20 @@
 
 namespace App\Services\Parent;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Storage;
-use JsonException;
-use ZipArchive;
-use function __;
 use App\Models\Book;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use PDOException;
+use JsonException;
 use function redirect;
-use Response;
 use function response;
 use function storage_path;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Yajra\DataTables\Facades\DataTables;
+use ZipArchive;
 
 class ExportService
 {
-
     public function books(): Collection
     {
         return Book::all();
@@ -38,14 +30,14 @@ class ExportService
     {
         $book = $this->get($request['book']);
         $directory = $this->createDirectory($book);
-        if(!$this->createBookJson($book, $directory)){
+        if (! $this->createBookJson($book, $directory)) {
             $this->deleteDirectory($directory);
 
             redirect()->back()->withErrors([
                 'Kitap bilgi dosyası oluşturulamadı.',
             ])->withInput()->throwResponse();
         }
-        if(!$this->copyFiles($book, $directory)){
+        if (! $this->copyFiles($book, $directory)) {
             $this->deleteDirectory($directory);
 
             redirect()->back()->withErrors([
@@ -53,7 +45,7 @@ class ExportService
             ])->withInput()->throwResponse();
         }
         $zipFile = $this->createZip($book, $directory);
-        if($zipFile === null){
+        if ($zipFile === null) {
             $this->deleteDirectory($directory);
 
             redirect()->back()->withErrors([
@@ -97,17 +89,17 @@ class ExportService
 
             ],
         ];
-        foreach($book->pages as $page){
+        foreach ($book->pages as $page) {
             $content['pages'][] = [
                 'page_order' => $page->page_order,
                 'image' => $page->image,
                 'sound' => $page->sound,
             ];
         }
-        try{
+        try {
             $json = json_encode($content, JSON_THROW_ON_ERROR);
             File::put($directory.'/book.json', $json);
-        }catch (JsonException){
+        } catch (JsonException) {
             return false;
         }
 
@@ -116,19 +108,19 @@ class ExportService
 
     private function copyFiles($book, $directory): bool
     {
-        try{
-            if(File::exists(storage_path('books/'.$book->cover)) && !File::copy(storage_path('books/'.$book->cover), $directory.'/images/'.$book->cover)){
+        try {
+            if (File::exists(storage_path('books/'.$book->cover)) && ! File::copy(storage_path('books/'.$book->cover), $directory.'/images/'.$book->cover)) {
                 return false;
             }
-            foreach($book->pages as $page){
-                if(File::exists(storage_path('books/'.$page->image)) && !File::copy(storage_path('books/'.$page->image), $directory.'/images/'.$page->image)){
+            foreach ($book->pages as $page) {
+                if (File::exists(storage_path('books/'.$page->image)) && ! File::copy(storage_path('books/'.$page->image), $directory.'/images/'.$page->image)) {
                     return false;
                 }
-                if($page->sound !== null && File::exists(storage_path('sound/'.$page->sound)) && !File::copy(storage_path('sound/'.$page->sound), $directory.'/sound/'.$page->sound)){
+                if ($page->sound !== null && File::exists(storage_path('sound/'.$page->sound)) && ! File::copy(storage_path('sound/'.$page->sound), $directory.'/sound/'.$page->sound)) {
                     return false;
                 }
             }
-        }catch(Exception){
+        } catch (Exception) {
             return false;
         }
 
@@ -139,8 +131,7 @@ class ExportService
     {
         $zip = new ZipArchive();
         $filename = Str::slug($book->title).'-'.$book->id.'.zip';
-        if ($zip->open(storage_path('export/'.$filename), ZipArchive::CREATE) === true)
-        {
+        if ($zip->open(storage_path('export/'.$filename), ZipArchive::CREATE) === true) {
             $files = File::allFiles($directory);
 
             foreach ($files as $file) {
@@ -154,5 +145,4 @@ class ExportService
 
         return null;
     }
-
 }

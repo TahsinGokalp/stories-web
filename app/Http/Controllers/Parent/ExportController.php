@@ -31,5 +31,4 @@ class ExportController extends Controller
     {
         return $this->export->download($request);
     }
-
 }
