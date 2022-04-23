@@ -9,7 +9,6 @@
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('books') }}" :active="request()->routeIs('books')">
@@ -24,6 +23,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('export') }}" :active="request()->routeIs('export')">
                         Dışa Aktar
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('import') }}" :active="request()->routeIs('import')">
+                        İçe Aktar
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -161,7 +165,11 @@
                 Dışa Aktar
             </x-jet-responsive-nav-link>
         </div>
-
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('import') }}" :active="request()->routeIs('import')">
+                İçe Aktar
+            </x-jet-responsive-nav-link>
+        </div>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">

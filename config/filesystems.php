@@ -48,6 +48,12 @@ return [
             'throw' => true,
         ],
 
+        'import' => [
+            'driver' => 'local',
+            'root' => storage_path('import'),
+            'throw' => true,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

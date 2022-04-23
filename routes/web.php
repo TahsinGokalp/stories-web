@@ -4,6 +4,7 @@ use App\Http\Controllers\Child\BookController as ChildBookController;
 use App\Http\Controllers\Parent\BookController as ParentBookController;
 use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
 use App\Http\Controllers\Parent\ExportController;
+use App\Http\Controllers\Parent\ImportController;
 use App\Http\Controllers\Parent\UsageController;
 use App\Http\Controllers\RedirectController;
 use App\Models\User;
@@ -74,5 +75,11 @@ Route::middleware([
     Route::prefix('books/export')->group(function () {
         Route::get('/', [ExportController::class, 'index'])->name('export');
         Route::post('download', [ExportController::class, 'download'])->name('export.download');
+    });
+
+    //Book Import
+    Route::prefix('books/import')->group(function () {
+        Route::get('/', [ImportController::class, 'index'])->name('import');
+        Route::post('start', [ImportController::class, 'start'])->name('import.start');
     });
 });
