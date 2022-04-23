@@ -6,6 +6,7 @@ use App\Http\Controllers\Parent\BookPageController as ParentBookPageController;
 use App\Http\Controllers\Parent\ExportController;
 use App\Http\Controllers\Parent\ImportController;
 use App\Http\Controllers\Parent\UsageController;
+use App\Http\Controllers\Parent\UserController;
 use App\Http\Controllers\RedirectController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -81,5 +82,16 @@ Route::middleware([
     Route::prefix('books/import')->group(function () {
         Route::get('/', [ImportController::class, 'index'])->name('import');
         Route::post('start', [ImportController::class, 'start'])->name('import.start');
+    });
+
+    //Users
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('users');
+        Route::get('data', [UserController::class, 'data'])->name('users.data');
+        Route::get('add', [UserController::class, 'add'])->name('users.add');
+        Route::post('save', [UserController::class, 'save'])->name('users.save');
+        Route::get('edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::post('delete/{id}', [UserController::class, 'delete'])->name('users.delete');
     });
 });
