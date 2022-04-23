@@ -25,7 +25,7 @@
             @foreach($book->pages as $page)
                 <div class="bb-item">
                     <div class="bb-custom-side">
-                        <img src="{{ asset('images/cover.png') }}" data-src="{{ route('child.books.page', $page->id) }}" class="hw-100 lazy" id="book-page-{{ $page->id }}" />
+                        <img alt="Page" src="{{ asset('images/cover.png') }}" data-src="{{ route('child.books.page', $page->id) }}" class="hw-100 lazy" id="book-page-{{ $page->id }}" />
                     </div>
                 </div>
             @endforeach
