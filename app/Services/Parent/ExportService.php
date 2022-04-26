@@ -44,6 +44,11 @@ class ExportService
                 'Resim ve ses dosyaları kopyalanamadı.',
             ])->withInput()->throwResponse();
         }
+        if((int)$request['html'] === 1 && !$this->createHtml($book, $directory)){
+            redirect()->back()->withErrors([
+                'HTML oluşturulamadı.',
+            ])->withInput()->throwResponse();
+        }
         $zipFile = $this->createZip($book, $directory);
         if ($zipFile === null) {
             $this->deleteDirectory($directory);
@@ -68,6 +73,8 @@ class ExportService
         File::makeDirectory($directory);
         File::makeDirectory($directory.'/images');
         File::makeDirectory($directory.'/sound');
+        File::makeDirectory($directory.'/assets');
+        File::makeDirectory($directory.'/fonts');
 
         return $directory;
     }
@@ -99,7 +106,7 @@ class ExportService
         try {
             $json = json_encode($content, JSON_THROW_ON_ERROR);
             File::put($directory.'/book.json', $json);
-        } catch (JsonException) {
+        } catch (Exception) {
             return false;
         }
 
@@ -120,6 +127,30 @@ class ExportService
                     return false;
                 }
             }
+        } catch (Exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function createHtml($book, $directory): bool
+    {
+        $view = view('parent.export.html', [
+            'book' => $book,
+        ]);
+        try {
+            File::put($directory.'/index.html', $view);
+            File::put($directory.'/assets/books.css', file_get_contents(public_path('css/books.css')));
+            File::put($directory.'/assets/bookblock.min.css', file_get_contents(public_path('plugins/bookblock/plugin.min.css')));
+            File::put($directory.'/assets/modernizr.min.js', file_get_contents(public_path('plugins/modernizr/plugin.min.js')));
+            File::put($directory.'/assets/jquery.min.js', file_get_contents(public_path('plugins/jquery/plugin.min.js')));
+            File::put($directory.'/assets/howler.min.js', file_get_contents(public_path('plugins/howler/plugin.min.js')));
+            File::put($directory.'/assets/bookblock.min.js', file_get_contents(public_path('plugins/bookblock/plugin.min.js')));
+            File::put($directory.'/fonts/arrows.eot', file_get_contents(public_path('fonts/arrows.eot')));
+            File::put($directory.'/fonts/arrows.svg', file_get_contents(public_path('fonts/arrows.svg')));
+            File::put($directory.'/fonts/arrows.ttf', file_get_contents(public_path('fonts/arrows.ttf')));
+            File::put($directory.'/fonts/arrows.woff', file_get_contents(public_path('fonts/arrows.woff')));
         } catch (Exception) {
             return false;
         }
