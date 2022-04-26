@@ -7,7 +7,6 @@ use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use JsonException;
 use function redirect;
 use function response;
 use function storage_path;
@@ -44,7 +43,7 @@ class ExportService
                 'Resim ve ses dosyaları kopyalanamadı.',
             ])->withInput()->throwResponse();
         }
-        if((int)$request['html'] === 1 && !$this->createHtml($book, $directory)){
+        if ((int) $request['html'] === 1 && ! $this->createHtml($book, $directory)) {
             redirect()->back()->withErrors([
                 'HTML oluşturulamadı.',
             ])->withInput()->throwResponse();
