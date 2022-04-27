@@ -2,6 +2,7 @@
 
 namespace App\Services\Parent;
 
+use App\Exceptions\CopyFilesException;
 use App\Models\Book;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -116,14 +117,14 @@ class ExportService
     {
         try {
             if (File::exists(storage_path('books/'.$book->cover)) && ! File::copy(storage_path('books/'.$book->cover), $directory.'/images/'.$book->cover)) {
-                return false;
+                throw new CopyFilesException();
             }
             foreach ($book->pages as $page) {
                 if (File::exists(storage_path('books/'.$page->image)) && ! File::copy(storage_path('books/'.$page->image), $directory.'/images/'.$page->image)) {
-                    return false;
+                    throw new CopyFilesException();
                 }
                 if ($page->sound !== null && File::exists(storage_path('sound/'.$page->sound)) && ! File::copy(storage_path('sound/'.$page->sound), $directory.'/sound/'.$page->sound)) {
-                    return false;
+                    throw new CopyFilesException();
                 }
             }
         } catch (Exception) {
