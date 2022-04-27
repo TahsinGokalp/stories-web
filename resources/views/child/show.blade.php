@@ -39,10 +39,14 @@
         </nav>
     </div>
 </div>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
 <script src="{{ asset('plugins/modernizr/plugin.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery/plugin.min.js') }}"></script>
 <script src="{{ asset('plugins/howler/plugin.min.js') }}"></script>
 <script src="{{ asset('plugins/bookblock/plugin.min.js') }}"></script>
+<script src="{{ asset('plugins/kCode/plugin.min.js') }}"></script>
 <script>
     var soundFiles = {
         @foreach($book->pages as $page)
@@ -60,6 +64,10 @@
         $('.blur').css("filter","");
         $('.full-height').hide();
     });
+    function onCode() {
+        document.getElementById('logout-form').submit();
+    }
+    document.addEventListener('konamiCode', onCode);
 </script>
 </body>
 </html>

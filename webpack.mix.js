@@ -84,6 +84,11 @@ mix.combine([
     'resources/plugins/dropzone/dropzone.css',
 ],'public/plugins/dropzone/plugin.min.css').purgeCss();
 
+// Jquery
+mix.combine([
+    'resources/plugins/kCode/k-code.js',
+],'public/plugins/kCode/plugin.min.js');
+
 if (mix.inProduction()) {
     mix.version();
 }
