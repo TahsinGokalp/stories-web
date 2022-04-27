@@ -1,22 +1,10 @@
-function makeDeleteBtn(body = {}, container = null, selector = null, title = null, text = null, deleteText = null, cancel = null, redirect = null, refresh = false){
-    if(container == null){
-        container = '#setting-default';
-    }
-    if(selector == null){
-        selector = '.delete-btn';
-    }
-    if(title == null){
-        title = localization.sweetalert2.title;
-    }
-    if(text == null){
-        text = localization.sweetalert2.text
-    }
-    if(deleteText == null){
-        deleteText = localization.sweetalert2.delete;
-    }
-    if(cancel == null){
-        cancel = localization.sweetalert2.cancel;
-    }
+function makeDeleteBtn(){
+    let container = '#setting-default';
+    let selector = '.delete-btn';
+    let title = localization.sweetalert2.title;
+    let text = localization.sweetalert2.text;
+    let deleteText = localization.sweetalert2.delete;
+    let cancel = localization.sweetalert2.cancel;
     return $(container).on('click', selector, function (event){
         let url = $(this).attr('href');
         event.preventDefault();
