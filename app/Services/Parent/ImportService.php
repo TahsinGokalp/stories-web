@@ -119,7 +119,7 @@ class ImportService
 
     private function moveFiles($directory): void
     {
-        File::moveDirectory($directory.'/images', storage_path('books'));
-        File::moveDirectory($directory.'/sound', storage_path('sound'));
+        File::copyDirectory($directory.'/images', storage_path('books'), true);
+        File::copyDirectory($directory.'/sound', storage_path('sound'), true);
     }
 }
