@@ -2,8 +2,14 @@
 
 [![StyleCI](https://github.styleci.io/repos/476856382/shield?branch=developer)](https://github.styleci.io/repos/476856382?branch=developer)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=bugs)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_stories-web&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_stories-web)
 
 <br />
+
 <div align="center">
   <a href="https://github.com/TahsinGokalp/stories-web">
     <img src="doc/logo.png" alt="Logo" width="80" height="80">
@@ -11,118 +17,66 @@
 <h3 align="center">Stories</h3>
 </div>
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://tahsingokalp.dev)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+...
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
+* [Laravel](https://laravel.com/)
+* [TailwindCSS](https://tailwindcss.com/)
 * [JQuery](https://jquery.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/TahsinGokalp/stories-web.git
+   ```
+2. Install Composer packages
+   ```sh
+   composer install
    ```
 3. Install NPM packages
    ```sh
    npm install
+   npm run dev
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
+4. Migrate and Seed
+     ```sh
+       php artisan migrate --seed
+     ```
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Email : parent@test.com<br />
+Password : 12345678<br />
+Role : Parent<br /><br />
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Email : child@test.com<br />
+Password : 12345678<br />
+Role : Child<br /><br />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Roadmap
 
 - [ ] Add Changelog
+- [ ] Add Release
 - [ ] Multi-language Support
     - [ ] English
     - [ ] Turkish
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/TahsinGokalp/stories-web/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -161,4 +115,4 @@ Project Link: [https://github.com/TahsinGokalp/stories-web](https://github.com/T
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/ss.jpg
