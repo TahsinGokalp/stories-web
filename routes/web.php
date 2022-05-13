@@ -24,8 +24,20 @@ Route::middleware([
     Route::prefix('books')->group(function () {
         //Home
         Route::get('/', [ChildBookController::class, 'index'])->name('child.books');
-        //Cover, Page, Sound Serve
+        //Cover
         Route::get('cover/{id}', [ChildBookController::class, 'cover'])->name('child.books.cover');
+    });
+});
+
+//Common Routes
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'role:'.User::CHILD.'|'.User::PARENT,
+])->group(callback: function () {
+    Route::prefix('books')->group(function () {
+        //Page, Sound Serve
         Route::get('page/{id}', [ChildBookController::class, 'page'])->name('child.books.page');
         Route::get('sound/{id}', [ChildBookController::class, 'sound'])->name('child.books.sound');
         //Book Detail
@@ -51,6 +63,7 @@ Route::middleware([
         Route::post('update/{id}', [ParentBookController::class, 'update'])->name('books.update');
         Route::post('delete/{id}', [ParentBookController::class, 'delete'])->name('books.delete');
         Route::get('serve/{id}', [ParentBookController::class, 'serve'])->name('books.serve');
+        Route::get('detail/{id}', [ChildBookController::class, 'show'])->name('books.show');
     });
 
     //Book Pages
