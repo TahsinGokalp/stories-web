@@ -19,8 +19,12 @@
             @endforeach
         </div>
     </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
     <script src="{{ asset('plugins/jquery/plugin.min.js') }}"></script>
     <script src="{{ asset('plugins/lazy/plugin.min.js') }}"></script>
+    <script src="{{ asset('plugins/kCode/plugin.min.js') }}"></script>
     <script>
         $(function() {
             $('.lazy').Lazy({
@@ -29,6 +33,10 @@
                 visibleOnly: true,
             });
         });
+        function onCode() {
+            document.getElementById('logout-form').submit();
+        }
+        document.addEventListener('konamiCode', onCode);
     </script>
 </main>
 </body>
