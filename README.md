@@ -115,4 +115,4 @@ Project Link: [https://github.com/TahsinGokalp/stories-web](https://github.com/T
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-[product-screenshot]: images/ss.jpg
+[product-screenshot]: doc/ss.jpg
