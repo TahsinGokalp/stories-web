@@ -20,6 +20,7 @@
     </div>
 </div>
 <div class="container-book blur">
+    <a href="{{ route('child.books') }}" class="bb-custom-icon bb-custom-icon-red bb-custom-icon-close close-icon">Close</a>
     <div class="bb-custom-wrapper">
         <div id="bb-bookblock" class="bb-bookblock">
             @foreach($book->pages as $page)
@@ -31,11 +32,8 @@
             @endforeach
         </div>
         <nav>
-            <a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
             <a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
             <a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
-            <a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a>
-            <a id="bb-close" href="{{ route('child.books') }}" class="bb-custom-icon bb-custom-icon-red bb-custom-icon-close">Close</a>
         </nav>
     </div>
 </div>

@@ -556,15 +556,34 @@ a img {
 
 .bb-custom-wrapper > nav a {
     display: inline-block;
-    width: 40px;
+    width: 90px;
     height: 40px;
     text-align: center;
     border-radius: 2px;
     background: #1baede;
     color: #fff;
     font-size: 0;
-    margin: 2px;
+    margin: 7px;
     text-decoration: none;
+}
+
+.close-icon{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 2px;
+    background: #1baede;
+    font-size: 0;
+    margin: 7px;
+    text-decoration: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 9999;
+    color: white !important;
+    opacity: 0.5;
+    text-decoration: none !important;
 }
 
 .bb-custom-wrapper > nav a:hover {
