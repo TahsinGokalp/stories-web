@@ -7,6 +7,7 @@ use App\Services\Parent\UsageService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+
 use function view;
 
 class UsageController extends Controller
