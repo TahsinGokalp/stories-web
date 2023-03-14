@@ -52,7 +52,6 @@ Route::middleware([
     'verified',
     'role:'.User::PARENT,
 ])->prefix('admin')->group(callback: function () {
-
     //Books
     Route::prefix('books')->group(function () {
         Route::get('/', [ParentBookController::class, 'index'])->name('books');
