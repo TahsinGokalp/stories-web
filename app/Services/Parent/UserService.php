@@ -2,18 +2,19 @@
 
 namespace App\Services\Parent;
 
-use function __;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use PDOException;
-use function redirect;
 use Response;
-use function response;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
+
+use function __;
+use function redirect;
+use function response;
 
 class UserService
 {

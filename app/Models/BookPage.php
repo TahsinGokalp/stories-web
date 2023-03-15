@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|BookPage wherePageOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BookPage whereSound($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BookPage whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class BookPage extends Model

@@ -12,8 +12,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use function redirect;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+
+use function redirect;
 use function view;
 
 class BookPageController extends Controller

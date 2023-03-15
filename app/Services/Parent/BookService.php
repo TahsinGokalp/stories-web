@@ -2,7 +2,6 @@
 
 namespace App\Services\Parent;
 
-use function __;
 use App\Models\Book;
 use App\Models\BookPage;
 use Exception;
@@ -11,12 +10,14 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use PDOException;
-use function redirect;
 use Response;
-use function response;
-use function storage_path;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Yajra\DataTables\Facades\DataTables;
+
+use function __;
+use function redirect;
+use function response;
+use function storage_path;
 
 class BookService
 {
