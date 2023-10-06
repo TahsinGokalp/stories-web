@@ -16,23 +16,23 @@ class UsageService
         ];
     }
 
-       private function imageFolderSize(): string
-       {
-           $fileSize = 0;
-           foreach (File::allFiles(storage_path('books')) as $file) {
-               $fileSize += $file->getSize();
-           }
+    private function imageFolderSize(): string
+    {
+        $fileSize = 0;
+        foreach (File::allFiles(storage_path('books')) as $file) {
+            $fileSize += $file->getSize();
+        }
 
-           return number_format($fileSize / 1048576, 2);
-       }
+        return number_format($fileSize / 1048576, 2);
+    }
 
-       private function soundFolderSize(): string
-       {
-           $fileSize = 0;
-           foreach (File::allFiles(storage_path('sound')) as $file) {
-               $fileSize += $file->getSize();
-           }
+    private function soundFolderSize(): string
+    {
+        $fileSize = 0;
+        foreach (File::allFiles(storage_path('sound')) as $file) {
+            $fileSize += $file->getSize();
+        }
 
-           return number_format($fileSize / 1048576, 2);
-       }
+        return number_format($fileSize / 1048576, 2);
+    }
 }
